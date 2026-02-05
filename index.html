@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>My experiment</title>
+  <title>Mental Rotation Replication Experiment</title>
   <script src="https://unpkg.com/jspsych@8.0.0"></script>
   <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
   <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
@@ -26,19 +26,19 @@
   // MAIN TO DO: How can we expand this systematically to encompass all stimuli?
 
   //create an example stimulus
-  // we're using z and m as respons keys here because they are far apart on the keyboard
+  // we're using f and j as respons keys here because they are far apart on the keyboard
   stimulus_item = {
     image_name: "stimuli/1_0.jpg",
     correct_response: "same",
-    correct_response_key: "z"
+    correct_response_key: "f"
   }
 
   // here's how we can construct a simple mental rotation trial
   // TO DO: what else do we need to add to the trial procedure? What other information should we store? How can we turn this into a complete experiment timeline?
   var trial = {
         type: jsPsychImageKeyboardResponse,
-        prompt: "<p>Press z if the images are the same, m if the images are different.<\p>",
-        choices: ["z", "m"],
+        prompt: "<p>Press f if the images are the same, j if the images are different.<\p>",
+        choices: ["f", "j"],
         data: { correct_response: stimulus_item['correct_response'],correct_response_key: stimulus_item['correct_response_key']},
         stimulus: stimulus_item['image_name']
       }
