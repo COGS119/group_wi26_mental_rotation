@@ -3,7 +3,14 @@
   <head>
     <title>Mental Rotation Replication Experiment</title>
     <script src="https://unpkg.com/jspsych@8.0.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+    <!-- plugin to preload the stimuli-->
+    <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
+    <!-- survey text plugin for collectin PID -->
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
+    <!-- fullscreen plug in -->
+    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
     <link
       href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css"
       rel="stylesheet"
@@ -20,14 +27,55 @@
       },
     });
 
-    /* TODO: preload all the stimuli images */
-
     /* create timeline */
     var timeline = [];
 
-    /* TODO: debrief participants */
+    // TODO: preload stimuli
+
+    // fullscreen mode
+    timeline.push({
+      type: jsPsychFullscreen,
+      fullscreen_mode: true
+    });
+
+    /* TODO: welcome participants */
+    var welcome = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "Welcome to the experiment. Press any key to begin."
+    };
+
+    // add the welcome trial to the timeline variable
+    timeline.push(welcome);
+
+    // collect participant ID
+    var participant_id_entry = {
+      type: jsPsychSurveyText,
+      // TODO: chose how we want to define PID
+      questions: [{ prompt: "Please enter your participant ID (e.g. p1):", name: "participant_id" }],
+      on_finish: function (data) {
+        console.log(data.response)
+        jsPsych.data.addProperties({
+          participant: data.response.participant_id
+        });
+      }
+
+    };
+    timeline.push(participant_id_entry);
 
     /* TODO: instructions */
+    var instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+      <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
+      <p>If the two shapes are the same, press 'f'.</p>
+      <p>If the two shapes are different, press 'j'.</p>
+      <p>Press any key to begin.</p>
+    `
+    };
+
+    // add instructions trial to the tl
+    timeline.push(instructions);
+
 
     /* TODO: basic comprehension check survey */
 
