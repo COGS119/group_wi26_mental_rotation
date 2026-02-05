@@ -82,7 +82,8 @@
     /* create stimulus list */
     // IDEA: each element in the array will be a dictionary so that we can concurrently store information about the correctness of the response
     // MAIN TO DO: How can we expand this systematically to encompass all stimuli?
-    var test_stimuli = [];
+    var stimulus_item = [];
+    var image_names = [];
     for (let i = 1; i < 49; i++) {
       for (let j = 0; j < 4; j++) {
         image = {
@@ -95,9 +96,17 @@
           correct_response: "different",
           correct_response_key: "j",
         };
-        test_stimuli.push(image, imageR);
+        image_names.push(image.image_name, imageR.image_name);
+        stimulus_item.push(image, imageR);
       }
     }
+    
+    //Preload files
+    var preload = {
+      type: jsPsychPreload,
+      images: image_names
+    };
+    timeline.push(preload);
 
     // here's how we can construct a simple mental rotation trial
     // TO DO: what else do we need to add to the trial procedure? What other information should we store? How can we turn this into a complete experiment timeline?
