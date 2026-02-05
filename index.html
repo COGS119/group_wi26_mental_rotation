@@ -82,14 +82,22 @@
     /* create stimulus list */
     // IDEA: each element in the array will be a dictionary so that we can concurrently store information about the correctness of the response
     // MAIN TO DO: How can we expand this systematically to encompass all stimuli?
-
-    //create an example stimulus
-    // we're using f and j as respons keys here because they are far apart on the keyboard
-    stimulus_item = {
-      image_name: "stimuli/1_0.jpg",
-      correct_response: "same",
-      correct_response_key: "f",
-    };
+    var test_stimuli = [];
+    for (let i = 1; i < 49; i++) {
+      for (let j = 0; j < 4; j++) {
+        image = {
+          image_name: `stimuli/${i}_${j*50}.jpg`,
+          correct_response: "same",
+          correct_response_key: "f",
+        };
+        imageR = {
+          image_name: `stimuli/${i}_${j*50}_R.jpg`,
+          correct_response: "different",
+          correct_response_key: "j",
+        };
+        test_stimuli.push(image, imageR);
+      }
+    }
 
     // here's how we can construct a simple mental rotation trial
     // TO DO: what else do we need to add to the trial procedure? What other information should we store? How can we turn this into a complete experiment timeline?
