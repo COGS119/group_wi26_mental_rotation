@@ -226,8 +226,6 @@
    //end the for loop here
  }
 
-
-
     /* TRIALS */
     // TODO: CHANGE NUMBER OF TRIALS LATER
     // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
@@ -255,6 +253,26 @@
 
     // TODO: add a second block
     // second block: 4 trials
+    for (let i = 0; i < 4; i++) {
+      // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
+      var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
+        stimulus_list,
+        1,
+      )[0];
+      // create a mental rotation trial from the stimulus item
+      var trial = {
+        type: jsPsychImageKeyboardResponse,
+        prompt:
+          "<p>Press f if the images are the same, j if the images are different.<\p>",
+        choices: ["f", "j"],
+        data: {
+          correct_response: stimulus_item["correct_response"],
+          correct_response_key: stimulus_item["correct_response_key"],
+        },
+        stimulus: stimulus_item["image_name"],
+      };
+      timeline.push(trial);
+    }
 
     /* TODO: thank you message */
     var thank_you = {
