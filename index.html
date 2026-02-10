@@ -12,7 +12,7 @@
     <!-- fullscreen plug in -->
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
     <!-- survey plugin for basic compehensive suvery check -->
-    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.0.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-form@2.0.0"></script>
     <!--survey plugin for multiple choice demographic data-->
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
     <link
@@ -171,51 +171,56 @@
     // add instructions trial to the tl
     timeline.push(instructions);
 
-/* basic comprehension check survey */
+/* basic comprehension check survey as a comprehensive form */
 var comprehension_check = {
-  type: jsPsychSurveyMultiChoice,
-  questions: [
-    {
-      prompt: "What counts as 'same'?",
-      options: [
-        "The two shapes are identical but may be rotated",
-        "The two shapes look different",
-        "The shapes are different colors"
-      ],
-      required: true
-    },
-    {
-      prompt: "Which key should you press if the shapes are the SAME?",
-      options: ["F", "J", "Spacebar"],
-      required: true
-    },
-    {
-      prompt: "What counts as 'different'?",
-      options: [
-        "The shapes are mirror images or structurally different",
-        "The shapes are rotated versions of each other",
-        "The shapes are the same but flipped upside down"
-      ],
-      required: true
-    },
-    {
-      prompt: "Which key should you press if the shapes are DIFFERENT?",
-      options: ["F", "J", "Spacebar"],
-      required: true
-    },
-    {
-      prompt: "How should you respond on each trial?",
-      options: [
-        "As quickly and accurately as possible",
-        "As slowly as possible",
-        "Accuracy does not matter"
-      ],
-      required: true
-    }
-  ],
-  on_finish: function(data) {
-    var responses = data.response;
+  type: jsPsychSurveyHtmlForm,
+  preamble: "<h3>Comprehension Survey</h3><p>Please answer the following questions:</p>",
+  html: `
+    <label>1. What counts as 'same'?</label><br>
+    <select name="Q0" required>
+      <option value="">Select an answer</option>
+      <option value="The two shapes are identical but may be rotated">The two shapes are identical but may be rotated</option>
+      <option value="The two shapes look different">The two shapes look different</option>
+      <option value="The shapes are different colors">The shapes are different colors</option>
+    </select><br><br>
 
+    <label>2. Which key should you press if the shapes are the SAME?</label><br>
+    <select name="Q1" required>
+      <option value="">Select an answer</option>
+      <option value="F">F</option>
+      <option value="J">J</option>
+      <option value="Spacebar">Spacebar</option>
+    </select><br><br>
+
+    <label>3. What counts as 'different'?</label><br>
+    <select name="Q2" required>
+      <option value="">Select an answer</option>
+      <option value="The shapes are mirror images or structurally different">The shapes are mirror images or structurally different</option>
+      <option value="The shapes are rotated versions of each other">The shapes are rotated versions of each other</option>
+      <option value="The shapes are the same but flipped upside down">The shapes are the same but flipped upside down</option>
+    </select><br><br>
+
+    <label>4. Which key should you press if the shapes are DIFFERENT?</label><br>
+    <select name="Q3" required>
+      <option value="">Select an answer</option>
+      <option value="F">F</option>
+      <option value="J">J</option>
+      <option value="Spacebar">Spacebar</option>
+    </select><br><br>
+
+    <label>5. How should you respond on each trial?</label><br>
+    <select name="Q4" required>
+      <option value="">Select an answer</option>
+      <option value="As quickly and accurately as possible">As quickly and accurately as possible</option>
+      <option value="As slowly as possible">As slowly as possible</option>
+      <option value="Accuracy does not matter">Accuracy does not matter</option>
+    </select><br><br>
+  `,
+  button_label: "Submit",
+  on_finish: function(data) {
+    var responses = JSON.parse(data.responses);
+
+    // check if answers are correct
     var correct =
       responses.Q0 === "The two shapes are identical but may be rotated" &&
       responses.Q1 === "F" &&
@@ -224,8 +229,15 @@ var comprehension_check = {
       responses.Q4 === "As quickly and accurately as possible";
 
     data.comprehension_correct = correct;
+    console.log(data); 
   }
 };
+
+// create timeline and run
+var timeline = [];
+timeline.push(comprehension_check);
+jsPsych.run(timeline);
+
 
     // Practice trials (6)
     // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
