@@ -37,23 +37,28 @@
     // we decided to create both the stimuli and image list at the same time here so that we do not have to duplicate the nested for-loop
     var stimulus_list = [];
     var image_names = [];
-    // iterate 49 times to iterate through all 49 groups of stimuli
+    // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
     for (let i = 1; i < 49; i++) {
-      // iterate 4 times because 4 orientations for each group
+      // iterate 4 times because there are 4 rotation angles for each base object
       for (let j = 0; j < 4; j++) {
-        // for each orientation, there is a same object and a different object
+        // for each configuration, there is a same object and a different object
         image = {
           image_name: `stimuli/${i}_${j * 50}.jpg`, // use regular expression to determine file name
+          object_num: i,
+          angle: j*50,
           correct_response: "same",
           correct_response_key: "f",
         };
         imageR = {
           image_name: `stimuli/${i}_${j * 50}_R.jpg`, // use regular expression to determine file name
+          object_num: i,
+          angle: j*50,
           correct_response: "different",
           correct_response_key: "j",
         };
-        // push to both image names and stimulus items array
+        // add stimulus file names to the image_names array to preload later.
         image_names.push(image.image_name, imageR.image_name);
+        // push stimulus to our list of stimuli.
         stimulus_list.push(image, imageR);
       }
     }
