@@ -32,45 +32,49 @@
     /* create timeline */
     var timeline = [];
 
-    /* preload stimuli and create stimuli list */
-    var stimulus_item = [];
+    /* create stimuli and image list */
+    // we decided to create both the stimuli and image list at the same time here so that we do not have to duplicate the nested for-loop
+    var stimulus_list = [];
     var image_names = [];
+    // iterate 49 times to iterate through all 49 groups of stimuli
     for (let i = 1; i < 49; i++) {
+      // iterate 4 times because 4 orientations for each group
       for (let j = 0; j < 4; j++) {
+        // for each orientation, there is a same object and a different object
         image = {
-          image_name: `stimuli/${i}_${j * 50}.jpg`,
+          image_name: `stimuli/${i}_${j * 50}.jpg`, // use regular expression to determine file name
           correct_response: "same",
           correct_response_key: "f",
         };
         imageR = {
-          image_name: `stimuli/${i}_${j * 50}_R.jpg`,
+          image_name: `stimuli/${i}_${j * 50}_R.jpg`, // use regular expression to determine file name
           correct_response: "different",
           correct_response_key: "j",
         };
+        // push to both image names and stimulus items array
         image_names.push(image.image_name, imageR.image_name);
-        stimulus_item.push(image, imageR);
+        stimulus_list.push(image, imageR);
       }
     }
 
-    //Preload files
+    /* Preload images */
     var preload = {
       type: jsPsychPreload,
       images: image_names,
     };
     timeline.push(preload);
 
-    // fullscreen mode
+    // change to fullscreen mode
     timeline.push({
       type: jsPsychFullscreen,
       fullscreen_mode: true,
     });
 
-    /* TODO: welcome participants */
+    /* welcome participants */
     var welcome = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: "Welcome to the experiment. Press any key to begin.",
     };
-
     // add the welcome trial to the timeline variable
     timeline.push(welcome);
 
@@ -92,7 +96,7 @@
       },
     };
     timeline.push(participant_id_entry);
-    
+
     /* TODO: Collect demographic information about participants */
     var demographic_info = {
       type: jsPsychSurveyMultiChoice,
@@ -107,13 +111,27 @@
         {
           prompt: "What year in college/university are you?",
           name: "Year",
-          options: ["1st year", "2nd year", "3rd year", "4th year", "5th year+"],
+          options: [
+            "1st year",
+            "2nd year",
+            "3rd year",
+            "4th year",
+            "5th year+",
+          ],
           required: true,
         },
         {
           prompt: "What is your specialization in Cognitive Science?", //this is assuming everyone in the class is a CogSci major, may change in the future? -aranza
           name: "Major",
-          options: ["Neuroscience", "Clinical Aspects of Cognition", "Design & Interaction", "Machine Learning & Neural Computation", "Cognitive Behavioral Neuroscience", "Language & Culture", "None, B.S. in CogSci"],
+          options: [
+            "Neuroscience",
+            "Clinical Aspects of Cognition",
+            "Design & Interaction",
+            "Machine Learning & Neural Computation",
+            "Cognitive Behavioral Neuroscience",
+            "Language & Culture",
+            "None, B.S. in CogSci",
+          ],
           required: true,
         },
         {
@@ -125,14 +143,20 @@
         {
           prompt: "Which gender do you most identify with?", //i can change the options or simply to sex for easier data analysis, i got this from SONA Systems example -aranza
           name: "Gender",
-          options: ["Man", "Woman", "Non-binary/ Non-conforming", "Transgender", "Prefer not to say"],
-          required: true
-        }
-      ]
-    }
+          options: [
+            "Man",
+            "Woman",
+            "Non-binary/ Non-conforming",
+            "Transgender",
+            "Prefer not to say",
+          ],
+          required: true,
+        },
+      ],
+    };
     timeline.push(demographic_info);
 
-    /* TODO: instructions */
+    /* instructions */
     var instructions = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: `
@@ -142,33 +166,51 @@
       <p>Press any key to begin.</p>
     `,
     };
-
     // add instructions trial to the tl
     timeline.push(instructions);
 
     /* TODO: basic comprehension check survey */
 
-    /* create stimulus list */
-    // IDEA: each element in the array will be a dictionary so that we can concurrently store information about the correctness of the response
-    // MAIN TO DO: How can we expand this systematically to encompass all stimuli?
+    /* TRIALS */
+    // TODO: CHANGE NUMBER OF TRIALS LATER
+    // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
+    // first block: 4 trials
+    for (let i = 0; i < 4; i++) {
+      // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
+      var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
+        stimulus_list,
+        1,
+      )[0];
+      // create a mental rotation trial from the stimulus item
+      var trial = {
+        type: jsPsychImageKeyboardResponse,
+        prompt:
+          "<p>Press f if the images are the same, j if the images are different.<\p>",
+        choices: ["f", "j"],
+        data: {
+          correct_response: stimulus_item["correct_response"],
+          correct_response_key: stimulus_item["correct_response_key"],
+        },
+        stimulus: stimulus_item["image_name"],
+      };
+      timeline.push(trial);
+    }
 
-    // here's how we can construct a simple mental rotation trial
-    // TO DO: what else do we need to add to the trial procedure? What other information should we store? How can we turn this into a complete experiment timeline?
-    var trial = {
-      type: jsPsychImageKeyboardResponse,
-      prompt:
-        "<p>Press f if the images are the same, j if the images are different.<\p>",
-      choices: ["f", "j"],
-      data: {
-        correct_response: stimulus_item["correct_response"],
-        correct_response_key: stimulus_item["correct_response_key"],
-      },
-      stimulus: stimulus_item["image_name"],
-    };
-
-    timeline.push(trial);
+    // TODO: add a second block
+    // second block: 4 trials
 
     /* TODO: thank you message */
+    var thank_you = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "Thank you for participating!",
+    };
+    // add the thank you to the timeline variable
+    timeline.push(thank_you);
+    // exit fullscreen mode; code taken from: https://www.jspsych.org/v7/overview/fullscreen/
+    timeline.push({
+      type: jsPsychFullscreen,
+      fullscreen_mode: false,
+    });
 
     /* start the experiment */
     jsPsych.run(timeline);
