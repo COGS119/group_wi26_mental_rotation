@@ -30,18 +30,43 @@
     /* create timeline */
     var timeline = [];
 
-    // TODO: preload stimuli
+    /* preload stimuli and create stimuli list */
+    var stimulus_item = [];
+    var image_names = [];
+    for (let i = 1; i < 49; i++) {
+      for (let j = 0; j < 4; j++) {
+        image = {
+          image_name: `stimuli/${i}_${j * 50}.jpg`,
+          correct_response: "same",
+          correct_response_key: "f",
+        };
+        imageR = {
+          image_name: `stimuli/${i}_${j * 50}_R.jpg`,
+          correct_response: "different",
+          correct_response_key: "j",
+        };
+        image_names.push(image.image_name, imageR.image_name);
+        stimulus_item.push(image, imageR);
+      }
+    }
+
+    //Preload files
+    var preload = {
+      type: jsPsychPreload,
+      images: image_names,
+    };
+    timeline.push(preload);
 
     // fullscreen mode
     timeline.push({
       type: jsPsychFullscreen,
-      fullscreen_mode: true
+      fullscreen_mode: true,
     });
 
     /* TODO: welcome participants */
     var welcome = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: "Welcome to the experiment. Press any key to begin."
+      stimulus: "Welcome to the experiment. Press any key to begin.",
     };
 
     // add the welcome trial to the timeline variable
@@ -51,14 +76,18 @@
     var participant_id_entry = {
       type: jsPsychSurveyText,
       // TODO: chose how we want to define PID
-      questions: [{ prompt: "Please enter your participant ID (e.g. p1):", name: "participant_id" }],
+      questions: [
+        {
+          prompt: "Please enter your participant ID (e.g. p1):",
+          name: "participant_id",
+        },
+      ],
       on_finish: function (data) {
-        console.log(data.response)
+        console.log(data.response);
         jsPsych.data.addProperties({
-          participant: data.response.participant_id
+          participant: data.response.participant_id,
         });
-      }
-
+      },
     };
     timeline.push(participant_id_entry);
 
@@ -70,43 +99,17 @@
       <p>If the two shapes are the same, press 'f'.</p>
       <p>If the two shapes are different, press 'j'.</p>
       <p>Press any key to begin.</p>
-    `
+    `,
     };
 
     // add instructions trial to the tl
     timeline.push(instructions);
-
 
     /* TODO: basic comprehension check survey */
 
     /* create stimulus list */
     // IDEA: each element in the array will be a dictionary so that we can concurrently store information about the correctness of the response
     // MAIN TO DO: How can we expand this systematically to encompass all stimuli?
-    var stimulus_item = [];
-    var image_names = [];
-    for (let i = 1; i < 49; i++) {
-      for (let j = 0; j < 4; j++) {
-        image = {
-          image_name: `stimuli/${i}_${j*50}.jpg`,
-          correct_response: "same",
-          correct_response_key: "f",
-        };
-        imageR = {
-          image_name: `stimuli/${i}_${j*50}_R.jpg`,
-          correct_response: "different",
-          correct_response_key: "j",
-        };
-        image_names.push(image.image_name, imageR.image_name);
-        stimulus_item.push(image, imageR);
-      }
-    }
-    
-    //Preload files
-    var preload = {
-      type: jsPsychPreload,
-      images: image_names
-    };
-    timeline.push(preload);
 
     // here's how we can construct a simple mental rotation trial
     // TO DO: what else do we need to add to the trial procedure? What other information should we store? How can we turn this into a complete experiment timeline?
