@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
     <!-- fullscreen plug in -->
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
+    <!-- survey plugin for basic compehensive suvery check -->
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.0.0"></script>
     <!--survey plugin for multiple choice demographic data-->
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
     <link
@@ -169,7 +171,61 @@
     // add instructions trial to the tl
     timeline.push(instructions);
 
-    /* TODO: basic comprehension check survey */
+/* basic comprehension check survey */
+var comprehension_check = {
+  type: jsPsychSurveyMultiChoice,
+  questions: [
+    {
+      prompt: "What counts as 'same'?",
+      options: [
+        "The two shapes are identical but may be rotated",
+        "The two shapes look different",
+        "The shapes are different colors"
+      ],
+      required: true
+    },
+    {
+      prompt: "Which key should you press if the shapes are the SAME?",
+      options: ["F", "J", "Spacebar"],
+      required: true
+    },
+    {
+      prompt: "What counts as 'different'?",
+      options: [
+        "The shapes are mirror images or structurally different",
+        "The shapes are rotated versions of each other",
+        "The shapes are the same but flipped upside down"
+      ],
+      required: true
+    },
+    {
+      prompt: "Which key should you press if the shapes are DIFFERENT?",
+      options: ["F", "J", "Spacebar"],
+      required: true
+    },
+    {
+      prompt: "How should you respond on each trial?",
+      options: [
+        "As quickly and accurately as possible",
+        "As slowly as possible",
+        "Accuracy does not matter"
+      ],
+      required: true
+    }
+  ],
+  on_finish: function(data) {
+    var responses = data.response;
+
+    var correct =
+      responses.Q0 === "The two shapes are identical but may be rotated" &&
+      responses.Q1 === "F" &&
+      responses.Q2 === "The shapes are mirror images or structurally different" &&
+      responses.Q3 === "J" &&
+      responses.Q4 === "As quickly and accurately as possible";
+
+    data.comprehension_correct = correct;
+  }
+};
 
     // Practice trials (6)
     // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
