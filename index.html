@@ -106,7 +106,7 @@
     /* TODO: Collect demographic information about participants */
     var demographic_info = {
       type: jsPsychSurveyMultiChoice,
-      preamble: "Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
+      preamble: "<br><br><br>Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
       questions: [
         {
           prompt: "What is your age?",
@@ -209,6 +209,7 @@
     var feedback = {
       type: jsPsychHtmlKeyboardResponse,
       trial_duration: 1000,
+      post_trial_gap: 250,
       stimulus: function () {
 
         var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
