@@ -25,6 +25,8 @@
   <script>
     /* initialize jsPsych */
     var jsPsych = initJsPsych({
+      show_progress_bar: true,
+      auto_update_progress_bar: false,
       on_finish: function () {
         jsPsych.data.displayData();
       },
@@ -103,7 +105,7 @@
     };
     timeline.push(participant_id_entry);
 
-    /* TODO: Collect demographic information about participants */
+    /* Collect demographic information about participants */
     var demographic_info = {
       type: jsPsychSurveyMultiChoice,
       preamble:
@@ -241,8 +243,10 @@
     /* TRIALS */
     // TODO: CHANGE NUMBER OF TRIALS LATER
     // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
+    var total_trials = 8;
+    var completed_trials = 0;
     // first block: 4 trials
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < total_trials / 2; i++) {
       // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
       var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
         stimulus_list,
@@ -259,13 +263,20 @@
           correct_response_key: stimulus_item["correct_response_key"],
         },
         stimulus: stimulus_item["image_name"],
+        on_finish: function () {
+          // https://www.jspsych.org/v8/overview/progress-bar/
+          // at the end of each trial, update the progress bar
+          // increment number of completed trials by 1 and divide by total # of trials
+          completed_trials++;
+          jsPsych.progressBar.progress = completed_trials / total_trials;
+        },
       };
       timeline.push(trial);
     }
 
     // TODO: add a second block
     // second block: 4 trials
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < total_trials / 2; i++) {
       // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
       var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
         stimulus_list,
@@ -282,6 +293,13 @@
           correct_response_key: stimulus_item["correct_response_key"],
         },
         stimulus: stimulus_item["image_name"],
+        on_finish: function () {
+          // https://www.jspsych.org/v8/overview/progress-bar/
+          // at the end of each trial, update the progress bar
+          // increment number of completed trials by 1 and divide by total # of trials
+          completed_trials++;
+          jsPsych.progressBar.progress = completed_trials / total_trials;
+        },
       };
       timeline.push(trial);
     }
