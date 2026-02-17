@@ -45,14 +45,14 @@
         image = {
           image_name: `stimuli/${i}_${j * 50}.jpg`, // use regular expression to determine file name
           object_num: i,
-          angle: j*50,
+          angle: j * 50,
           correct_response: "same",
           correct_response_key: "f",
         };
         imageR = {
           image_name: `stimuli/${i}_${j * 50}_R.jpg`, // use regular expression to determine file name
           object_num: i,
-          angle: j*50,
+          angle: j * 50,
           correct_response: "different",
           correct_response_key: "j",
         };
@@ -106,7 +106,8 @@
     /* TODO: Collect demographic information about participants */
     var demographic_info = {
       type: jsPsychSurveyMultiChoice,
-      preamble: "<br><br><br>Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
+      preamble:
+        "<br><br><br>Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
       questions: [
         {
           prompt: "What is your age?",
@@ -175,57 +176,67 @@
     // add instructions trial to the tl
     timeline.push(instructions);
 
-/*basic comprehension survey check */
+    /*basic comprehension survey check */
 
     // Practice trials (6)
     // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
     // TODO: remove this stimuli from the testing blocks
     // TODO: make feedback more obvious
-    var practice_stimuli = ['1_0_R', '1_0', '1_50', '1_100_R', '1_150_R', '1_150']
+    var practice_stimuli = [
+      "1_0_R",
+      "1_0",
+      "1_50",
+      "1_100_R",
+      "1_150_R",
+      "1_150",
+    ];
 
-    var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1)
+    var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
 
     for (let i = 0; i < shuffled_practice.length; i++) {
-    //cycle through all trials in the practice block
-    var current_prac = shuffled_practice[i];
+      //cycle through all trials in the practice block
+      var current_prac = shuffled_practice[i];
 
-    let correct_key = current_prac.endsWith("_R") ? "j" : "f";
+      let correct_key = current_prac.endsWith("_R") ? "j" : "f";
 
-    // create a trial
-    var prac_test = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: '<img src="stimuli/' + current_prac + '.jpg">',
-      prompt: "<p>Press <strong>f<\strong> if the images are the same, <strong>j<\strong> if the images are different.<\p>",
-      choices: ["f", "j"],
-      data: {
-        correct_key: correct_key
-      },
-      on_finish: function (data) {
-      // keyboard response is the key itself!
-        data.correct = data.response === data.correct_key;
+      // create a trial
+      var prac_test = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<img src="stimuli/' + current_prac + '.jpg">',
+        prompt:
+          "<p>Press <strong>f<\strong> if the images are the same, <strong>j<\strong> if the images are different.<\p>",
+        choices: ["f", "j"],
+        data: {
+          correct_key: correct_key,
+        },
+        on_finish: function (data) {
+          // keyboard response is the key itself!
+          data.correct = data.response === data.correct_key;
+        },
+      };
+
+      var feedback = {
+        type: jsPsychHtmlKeyboardResponse,
+        trial_duration: 1000,
+        post_trial_gap: 250,
+        stimulus: function () {
+          var last_trial_correct = jsPsych.data
+            .get()
+            .last(1)
+            .values()[0].correct;
+          if (last_trial_correct) {
+            return "<p>Correct!</p>"; // the parameter value has to be returned from the function
+          } else {
+            return "<p>Incorrect.</p>"; // the parameter value has to be returned from the function
+          }
+        },
+      };
+
+      //push the test and feedback trials
+      timeline.push(prac_test, feedback);
+
+      //end the for loop here
     }
-    };
-
-    var feedback = {
-      type: jsPsychHtmlKeyboardResponse,
-      trial_duration: 1000,
-      post_trial_gap: 250,
-      stimulus: function () {
-
-        var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-        if (last_trial_correct) {
-          return "<p>Correct!</p>"; // the parameter value has to be returned from the function
-        } else {
-          return "<p>Incorrect.</p>"; // the parameter value has to be returned from the function
-        }
-      }
-    };
-
-    //push the test and feedback trials
-    timeline.push(prac_test,feedback);
-
-   //end the for loop here
- }
 
     /* TRIALS */
     // TODO: CHANGE NUMBER OF TRIALS LATER
