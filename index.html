@@ -80,7 +80,8 @@
       fullscreen_mode: true,
     });
 
-    /* welcome participants */
+    /* INTRODUCTION */
+    // welcome participants
     var welcome = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: "Welcome to the experiment. Press any key to begin.",
@@ -187,15 +188,23 @@
       <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
       <p>If the two shapes are the same, press 'f'.</p>
       <p>If the two shapes are different, press 'j'.</p>
-      <p>Press any key to begin.</p>
+      <p>Press any key to continue.</p>
     `,
     };
     // add instructions trial to the tl
     timeline.push(instructions);
 
-    /*basic comprehension survey check */
+    /* TODO: basic comprehension survey check */
 
-    // Practice trials (6)
+    /* PRACTICE TRIALS (6) */
+    var practice_start = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus:
+        "There will be 6 practice trials before the real experiment. Press any key to begin.",
+    };
+    // add the practice start trial to the timeline variable
+    timeline.push(practice_start);
+
     // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
     // TODO: remove this stimuli from the testing blocks
     // TODO: make feedback more obvious
@@ -221,7 +230,7 @@
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<img src="stimuli/' + current_prac + '.jpg">',
         prompt:
-          "<p>Press <strong>f<\strong> if the images are the same, <strong>j<\strong> if the images are different.<\p>",
+          "<p>Press f if the shapes are the same, j if the shapes are different.<\p>",
         choices: ["f", "j"],
         data: {
           correct_key: correct_key,
@@ -256,6 +265,13 @@
     }
 
     /* TRIALS */
+    var trials_start = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus:
+        "We will now begin the real experiment. Press any key to begin.",
+    };
+    // add the trials start trial to the timeline variable
+    timeline.push(trials_start);
     // TODO: CHANGE NUMBER OF TRIALS LATER
     // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
     var total_trials = 8;
@@ -271,7 +287,7 @@
       var trial = {
         type: jsPsychImageKeyboardResponse,
         prompt:
-          "<p>Press f if the images are the same, j if the images are different.<\p>",
+          "<p>Press f if the shapes are the same, j if the shapes are different.<\p>",
         choices: ["f", "j"],
         data: {
           correct_response: stimulus_item["correct_response"],
@@ -289,7 +305,13 @@
       timeline.push(trial);
     }
 
-    // TODO: add a second block
+    var block_gap = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "You may now take a brief break before the next block. Press any key to continue.",
+    };
+    // add the block gap trial to the timeline variable
+    timeline.push(block_gap);
+
     // second block: 4 trials
     for (let i = 0; i < total_trials / 2; i++) {
       // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
@@ -301,7 +323,7 @@
       var trial = {
         type: jsPsychImageKeyboardResponse,
         prompt:
-          "<p>Press f if the images are the same, j if the images are different.<\p>",
+          "<p>Press f if the shapes are the same, j if the shapes are different.<\p>",
         choices: ["f", "j"],
         data: {
           correct_response: stimulus_item["correct_response"],
