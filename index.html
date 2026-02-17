@@ -1,323 +1,348 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Mental Rotation Replication Experiment</title>
-    <script src="https://unpkg.com/jspsych@8.0.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
-    <!-- plugin to preload the stimuli-->
-    <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
-    <!-- survey text plugin for collectin PID -->
-    <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
-    <!-- fullscreen plug in -->
-    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
-    <!-- survey plugin for basic compehensive suvery check -->
-    <!--survey plugin for multiple choice demographic data-->
-    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
-    <link
-      href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-  </head>
 
-  <body></body>
-  <script>
-    /* initialize jsPsych */
-    var jsPsych = initJsPsych({
-      show_progress_bar: true,
-      auto_update_progress_bar: false,
-      on_finish: function () {
-        jsPsych.data.displayData();
-      },
-    });
+<head>
+  <title>Mental Rotation Replication Experiment</title>
+  <script src="https://unpkg.com/jspsych@8.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+  <!-- plugin to preload the stimuli-->
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
+  <!-- survey text plugin for collectin PID -->
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
+  <!-- fullscreen plug in -->
+  <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
+  <!-- survey plugin for basic compehensive suvery check -->
+  <!--survey plugin for multiple choice demographic data-->
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
+  <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+  <!-- This is for data storage - please be sure to keep this script in all future updates to the code!! -->
+  <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
+</head>
 
-    /* create timeline */
-    var timeline = [];
+<body></body>
+<script>
+  /* initialize jsPsych */
+  var jsPsych = initJsPsych({
+    show_progress_bar: true,
+    auto_update_progress_bar: false,
+    on_finish: function () {
+      jsPsych.data.displayData();
+    },
+  });
 
-    /* create stimuli and image list */
-    // we decided to create both the stimuli and image list at the same time here so that we do not have to duplicate the nested for-loop
-    var stimulus_list = [];
-    var image_names = [];
-    // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
-    for (let i = 1; i < 49; i++) {
-      // iterate 4 times because there are 4 rotation angles for each base object
-      for (let j = 0; j < 4; j++) {
-        // for each configuration, there is a same object and a different object
-        image = {
-          image_name: `stimuli/${i}_${j * 50}.jpg`, // use regular expression to determine file name
-          object_num: i,
-          angle: j * 50,
-          correct_response: "same",
-          correct_response_key: "f",
-        };
-        imageR = {
-          image_name: `stimuli/${i}_${j * 50}_R.jpg`, // use regular expression to determine file name
-          object_num: i,
-          angle: j * 50,
-          correct_response: "different",
-          correct_response_key: "j",
-        };
-        // add stimulus file names to the image_names array to preload later.
-        image_names.push(image.image_name, imageR.image_name);
-        // push stimulus to our list of stimuli.
-        stimulus_list.push(image, imageR);
-      }
+  /* create timeline */
+  var timeline = [];
+
+  /* create stimuli and image list */
+  // we decided to create both the stimuli and image list at the same time here so that we do not have to duplicate the nested for-loop
+  var stimulus_list = [];
+  var image_names = [];
+  // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
+  for (let i = 1; i < 49; i++) {
+    // iterate 4 times because there are 4 rotation angles for each base object
+    for (let j = 0; j < 4; j++) {
+      // for each configuration, there is a same object and a different object
+      image = {
+        image_name: `stimuli/${i}_${j * 50}.jpg`, // use regular expression to determine file name
+        object_num: i,
+        angle: j * 50,
+        correct_response: "same",
+        correct_response_key: "f",
+      };
+      imageR = {
+        image_name: `stimuli/${i}_${j * 50}_R.jpg`, // use regular expression to determine file name
+        object_num: i,
+        angle: j * 50,
+        correct_response: "different",
+        correct_response_key: "j",
+      };
+      // add stimulus file names to the image_names array to preload later.
+      image_names.push(image.image_name, imageR.image_name);
+      // push stimulus to our list of stimuli.
+      stimulus_list.push(image, imageR);
     }
+  }
 
-    /* Preload images */
-    var preload = {
-      type: jsPsychPreload,
-      images: image_names,
-    };
-    timeline.push(preload);
+  /* Preload images */
+  var preload = {
+    type: jsPsychPreload,
+    images: image_names,
+  };
+  timeline.push(preload);
 
-    // change to fullscreen mode
-    timeline.push({
-      type: jsPsychFullscreen,
-      fullscreen_mode: true,
-    });
+  // change to fullscreen mode
+  timeline.push({
+    type: jsPsychFullscreen,
+    fullscreen_mode: true,
+  });
 
-    /* welcome participants */
-    var welcome = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: "Welcome to the experiment. Press any key to begin.",
-    };
-    // add the welcome trial to the timeline variable
-    timeline.push(welcome);
+  /* welcome participants */
+  var welcome = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "Welcome to the experiment. Press any key to begin.",
+  };
+  // add the welcome trial to the timeline variable
+  timeline.push(welcome);
 
-    // collect participant ID
-    var participant_id_entry = {
-      type: jsPsychSurveyText,
-      // TODO: chose how we want to define PID
-      questions: [
-        {
-          prompt: "Please enter your participant ID (e.g. p1):",
-          name: "participant_id",
-        },
-      ],
-      on_finish: function (data) {
-        console.log(data.response);
-        jsPsych.data.addProperties({
-          participant: data.response.participant_id,
-        });
+  // collect participant ID
+  var participant_id_entry = {
+    type: jsPsychSurveyText,
+    // TODO: chose how we want to define PID
+    questions: [
+      {
+        prompt: "Please enter your participant ID (e.g. p1):",
+        name: "participant_id",
       },
-    };
-    timeline.push(participant_id_entry);
+    ],
+    on_finish: function (data) {
+      console.log(data.response);
+      jsPsych.data.addProperties({
+        participant: data.response.participant_id,
+      });
+    },
+  };
+  timeline.push(participant_id_entry);
 
-    /* Collect demographic information about participants */
-    var demographic_info = {
-      type: jsPsychSurveyMultiChoice,
-      preamble:
-        "<br><br><br>Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
-      questions: [
-        {
-          prompt: "What is your age?",
-          name: "Age",
-          options: ["18-21", "22-25", "26-30", "31+"],
-          required: true,
-        },
-        {
-          prompt: "What year in college/university are you?",
-          name: "Year",
-          options: [
-            "1st year",
-            "2nd year",
-            "3rd year",
-            "4th year",
-            "5th year+",
-          ],
-          required: true,
-        },
-        {
-          prompt: "What is your specialization in Cognitive Science?", //this is assuming everyone in the class is a CogSci major, may change in the future? -aranza
-          name: "Major",
-          options: [
-            "Neuroscience",
-            "Clinical Aspects of Cognition",
-            "Design & Interaction",
-            "Machine Learning & Neural Computation",
-            "Cognitive Behavioral Neuroscience",
-            "Language & Culture",
-            "None, B.S. in CogSci",
-          ],
-          required: true,
-        },
-        {
-          prompt: "Do you have a minor?", //need to add text option for minor, but idk if i should do that in a separate function/ plugin...? -aranza
-          name: "Minor",
-          options: ["Yes", "No"],
-          required: true,
-        },
-        {
-          prompt: "Which gender do you most identify with?", //i can change the options or simply to sex for easier data analysis, i got this from SONA Systems example -aranza
-          name: "Gender",
-          options: [
-            "Man",
-            "Woman",
-            "Non-binary/ Non-conforming",
-            "Transgender",
-            "Prefer not to say",
-          ],
-          required: true,
-        },
-      ],
-    };
-    timeline.push(demographic_info);
+  //PLEASE KEEP FOR ALL FUTURE ITERATIONS
+  //create a unique filename by combining a random string and a millisecond counter (to avoid duplicates)
+  var random_id = jsPsych.randomization.randomID(10);
+  const date = new Date();
+  random_id = "p" + random_id.toString();
+  var file_id = random_id + "_" + date.getTime().toString();
+  const filename = `${file_id}.csv`;
+  //also store the random id for convenience
+  jsPsych.data.addProperties({
+    random_id: random_id,
+  });
+  //PLEASE KEEP FOR ALL FUTURE ITERATIONS
 
-    /* instructions */
-    var instructions = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: `
+  /* Collect demographic information about participants */
+  var demographic_info = {
+    type: jsPsychSurveyMultiChoice,
+    preamble:
+      "<br><br><br>Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
+    questions: [
+      {
+        prompt: "What is your age?",
+        name: "Age",
+        options: ["18-21", "22-25", "26-30", "31+"],
+        required: true,
+      },
+      {
+        prompt: "What year in college/university are you?",
+        name: "Year",
+        options: [
+          "1st year",
+          "2nd year",
+          "3rd year",
+          "4th year",
+          "5th year+",
+        ],
+        required: true,
+      },
+      {
+        prompt: "What is your specialization in Cognitive Science?", //this is assuming everyone in the class is a CogSci major, may change in the future? -aranza
+        name: "Major",
+        options: [
+          "Neuroscience",
+          "Clinical Aspects of Cognition",
+          "Design & Interaction",
+          "Machine Learning & Neural Computation",
+          "Cognitive Behavioral Neuroscience",
+          "Language & Culture",
+          "None, B.S. in CogSci",
+        ],
+        required: true,
+      },
+      {
+        prompt: "Do you have a minor?", //need to add text option for minor, but idk if i should do that in a separate function/ plugin...? -aranza
+        name: "Minor",
+        options: ["Yes", "No"],
+        required: true,
+      },
+      {
+        prompt: "Which gender do you most identify with?", //i can change the options or simply to sex for easier data analysis, i got this from SONA Systems example -aranza
+        name: "Gender",
+        options: [
+          "Man",
+          "Woman",
+          "Non-binary/ Non-conforming",
+          "Transgender",
+          "Prefer not to say",
+        ],
+        required: true,
+      },
+    ],
+  };
+  timeline.push(demographic_info);
+
+  /* instructions */
+  var instructions = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
       <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
       <p>If the two shapes are the same, press 'f'.</p>
       <p>If the two shapes are different, press 'j'.</p>
       <p>Press any key to begin.</p>
     `,
-    };
-    // add instructions trial to the tl
-    timeline.push(instructions);
+  };
+  // add instructions trial to the tl
+  timeline.push(instructions);
 
-    /*basic comprehension survey check */
+  /*basic comprehension survey check */
 
-    // Practice trials (6)
-    // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
-    // TODO: remove this stimuli from the testing blocks
-    // TODO: make feedback more obvious
-    var practice_stimuli = [
-      "1_0_R",
-      "1_0",
-      "1_50",
-      "1_100_R",
-      "1_150_R",
-      "1_150",
-    ];
+  // Practice trials (6)
+  // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
+  // TODO: remove this stimuli from the testing blocks
+  // TODO: make feedback more obvious
+  var practice_stimuli = [
+    "1_0_R",
+    "1_0",
+    "1_50",
+    "1_100_R",
+    "1_150_R",
+    "1_150",
+  ];
 
-    var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
+  var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
 
-    for (let i = 0; i < shuffled_practice.length; i++) {
-      //cycle through all trials in the practice block
-      var current_prac = shuffled_practice[i];
+  for (let i = 0; i < shuffled_practice.length; i++) {
+    //cycle through all trials in the practice block
+    var current_prac = shuffled_practice[i];
 
-      let correct_key = current_prac.endsWith("_R") ? "j" : "f";
+    let correct_key = current_prac.endsWith("_R") ? "j" : "f";
 
-      // create a trial
-      var prac_test = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<img src="stimuli/' + current_prac + '.jpg">',
-        prompt:
-          "<p>Press <strong>f<\strong> if the images are the same, <strong>j<\strong> if the images are different.<\p>",
-        choices: ["f", "j"],
-        data: {
-          correct_key: correct_key,
-        },
-        on_finish: function (data) {
-          // keyboard response is the key itself!
-          data.correct = data.response === data.correct_key;
-        },
-      };
-
-      var feedback = {
-        type: jsPsychHtmlKeyboardResponse,
-        trial_duration: 1000,
-        post_trial_gap: 250,
-        stimulus: function () {
-          var last_trial_correct = jsPsych.data
-            .get()
-            .last(1)
-            .values()[0].correct;
-          if (last_trial_correct) {
-            return "<p>Correct!</p>"; // the parameter value has to be returned from the function
-          } else {
-            return "<p>Incorrect.</p>"; // the parameter value has to be returned from the function
-          }
-        },
-      };
-
-      //push the test and feedback trials
-      timeline.push(prac_test, feedback);
-
-      //end the for loop here
-    }
-
-    /* TRIALS */
-    // TODO: CHANGE NUMBER OF TRIALS LATER
-    // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
-    var total_trials = 8;
-    var completed_trials = 0;
-    // first block: 4 trials
-    for (let i = 0; i < total_trials / 2; i++) {
-      // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
-      var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
-        stimulus_list,
-        1,
-      )[0];
-      // create a mental rotation trial from the stimulus item
-      var trial = {
-        type: jsPsychImageKeyboardResponse,
-        prompt:
-          "<p>Press f if the images are the same, j if the images are different.<\p>",
-        choices: ["f", "j"],
-        data: {
-          correct_response: stimulus_item["correct_response"],
-          correct_response_key: stimulus_item["correct_response_key"],
-        },
-        stimulus: stimulus_item["image_name"],
-        on_finish: function () {
-          // https://www.jspsych.org/v8/overview/progress-bar/
-          // at the end of each trial, update the progress bar
-          // increment number of completed trials by 1 and divide by total # of trials
-          completed_trials++;
-          jsPsych.progressBar.progress = completed_trials / total_trials;
-        },
-      };
-      timeline.push(trial);
-    }
-
-    // TODO: add a second block
-    // second block: 4 trials
-    for (let i = 0; i < total_trials / 2; i++) {
-      // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
-      var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
-        stimulus_list,
-        1,
-      )[0];
-      // create a mental rotation trial from the stimulus item
-      var trial = {
-        type: jsPsychImageKeyboardResponse,
-        prompt:
-          "<p>Press f if the images are the same, j if the images are different.<\p>",
-        choices: ["f", "j"],
-        data: {
-          correct_response: stimulus_item["correct_response"],
-          correct_response_key: stimulus_item["correct_response_key"],
-        },
-        stimulus: stimulus_item["image_name"],
-        on_finish: function () {
-          // https://www.jspsych.org/v8/overview/progress-bar/
-          // at the end of each trial, update the progress bar
-          // increment number of completed trials by 1 and divide by total # of trials
-          completed_trials++;
-          jsPsych.progressBar.progress = completed_trials / total_trials;
-        },
-      };
-      timeline.push(trial);
-    }
-
-    /* TODO: thank you message */
-    var thank_you = {
+    // create a trial
+    var prac_test = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: "Thank you for participating!",
+      stimulus: '<img src="stimuli/' + current_prac + '.jpg">',
+      prompt:
+        "<p>Press <strong>f<\strong> if the images are the same, <strong>j<\strong> if the images are different.<\p>",
+      choices: ["f", "j"],
+      data: {
+        correct_key: correct_key,
+      },
+      on_finish: function (data) {
+        // keyboard response is the key itself!
+        data.correct = data.response === data.correct_key;
+      },
     };
-    // add the thank you to the timeline variable
-    timeline.push(thank_you);
-    // exit fullscreen mode; code taken from: https://www.jspsych.org/v7/overview/fullscreen/
-    timeline.push({
-      type: jsPsychFullscreen,
-      fullscreen_mode: false,
-    });
 
-    /* start the experiment */
-    jsPsych.run(timeline);
-  </script>
+    var feedback = {
+      type: jsPsychHtmlKeyboardResponse,
+      trial_duration: 1000,
+      post_trial_gap: 250,
+      stimulus: function () {
+        var last_trial_correct = jsPsych.data
+          .get()
+          .last(1)
+          .values()[0].correct;
+        if (last_trial_correct) {
+          return "<p>Correct!</p>"; // the parameter value has to be returned from the function
+        } else {
+          return "<p>Incorrect.</p>"; // the parameter value has to be returned from the function
+        }
+      },
+    };
+
+    //push the test and feedback trials
+    timeline.push(prac_test, feedback);
+
+    //end the for loop here
+  }
+
+  /* TRIALS */
+  // TODO: CHANGE NUMBER OF TRIALS LATER
+  // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
+  var total_trials = 8;
+  var completed_trials = 0;
+  // first block: 4 trials
+  for (let i = 0; i < total_trials / 2; i++) {
+    // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
+    var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
+      stimulus_list,
+      1,
+    )[0];
+    // create a mental rotation trial from the stimulus item
+    var trial = {
+      type: jsPsychImageKeyboardResponse,
+      prompt:
+        "<p>Press f if the images are the same, j if the images are different.<\p>",
+      choices: ["f", "j"],
+      data: {
+        correct_response: stimulus_item["correct_response"],
+        correct_response_key: stimulus_item["correct_response_key"],
+      },
+      stimulus: stimulus_item["image_name"],
+      on_finish: function () {
+        // https://www.jspsych.org/v8/overview/progress-bar/
+        // at the end of each trial, update the progress bar
+        // increment number of completed trials by 1 and divide by total # of trials
+        completed_trials++;
+        jsPsych.progressBar.progress = completed_trials / total_trials;
+      },
+    };
+    timeline.push(trial);
+  }
+
+  // TODO: add a second block
+  // second block: 4 trials
+  for (let i = 0; i < total_trials / 2; i++) {
+    // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
+    var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
+      stimulus_list,
+      1,
+    )[0];
+    // create a mental rotation trial from the stimulus item
+    var trial = {
+      type: jsPsychImageKeyboardResponse,
+      prompt:
+        "<p>Press f if the images are the same, j if the images are different.<\p>",
+      choices: ["f", "j"],
+      data: {
+        correct_response: stimulus_item["correct_response"],
+        correct_response_key: stimulus_item["correct_response_key"],
+      },
+      stimulus: stimulus_item["image_name"],
+      on_finish: function () {
+        // https://www.jspsych.org/v8/overview/progress-bar/
+        // at the end of each trial, update the progress bar
+        // increment number of completed trials by 1 and divide by total # of trials
+        completed_trials++;
+        jsPsych.progressBar.progress = completed_trials / total_trials;
+      },
+    };
+    timeline.push(trial);
+  }
+
+  //PLEASE KEEP FOR ALL FUTURE ITERATIONS
+  //this portion of the code ensures that the data gets sent to be stored on OSF
+  const save_data = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "horOOckL0l3L",
+    filename: filename,
+    data_string: () => jsPsych.data.get().csv()
+  };
+  timeline.push(save_data);
+  //PLEASE KEEP FOR ALL FUTURE ITERATIONS
+
+  /* TODO: thank you message */
+  var thank_you = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "Thank you for participating!",
+  };
+  // add the thank you to the timeline variable
+  timeline.push(thank_you);
+  // exit fullscreen mode; code taken from: https://www.jspsych.org/v7/overview/fullscreen/
+  timeline.push({
+    type: jsPsychFullscreen,
+    fullscreen_mode: false,
+  });
+
+  /* start the experiment */
+  jsPsych.run(timeline);
+</script>
+
 </html>
