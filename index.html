@@ -50,6 +50,23 @@
     var group100R = [];
     var group150 = [];
     var group150R = [];
+
+    // manually selecting stimuli of interest for the practice trials: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
+    var practice_stimuli = [
+      "1_0_R",
+      "1_0",
+      "1_50",
+      "1_100_R",
+      "1_150_R",
+      "1_150",
+      "2_0_R",
+      "2_50",
+      "2_50_R",
+      "2_100",
+      "2_150",
+      "2_150_R"
+    ];
+
     // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
     for (let i = 1; i < 49; i++) {
       // iterate 4 times because there are 4 rotation angles for each base object
@@ -76,11 +93,18 @@
         // get the correct list for our current iteration
         let active_list = `group${j * 50}`
         let active_listR = `group${j * 50}R`
-        this [active_list].push(image);
-        this [active_listR].push(imageR);
+        // if statements that keep images selected for the practice trial out of the final stimulus lists.
+        if (practice_stimuli.includes(`${i}_${j * 50}`)){
+        } else {
+          this [active_list].push(image);
+        }
+        if (practice_stimuli.includes(`${i}_${j * 50}_R`)){
+        } else {
+          this [active_listR].push(imageR);
+        }
       }
     }
-console.log(group0)
+
     /* Preload images */
     var preload = {
       type: jsPsychPreload,
@@ -106,7 +130,6 @@ console.log(group0)
     // collect participant ID
     var participant_id_entry = {
       type: jsPsychSurveyText,
-      // TODO: chose how we want to define PID
       questions: [
         {
           prompt: "Please enter your participant ID (e.g. p1):",
@@ -159,30 +182,12 @@ console.log(group0)
     // add the practice start trial to the timeline variable
     timeline.push(practice_start);
 
-    // stimuli of interest: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
-    // TODO: remove this stimuli from the testing blocks
     // TODO: make feedback more obvious
-    var practice_stimuli = [
-      "1_0_R",
-      "1_0",
-      "1_50",
-      "1_100_R",
-      "1_150_R",
-      "1_150",
-      "2_0_R",
-      "2_50",
-      "2_50_R",
-      "2_100",
-      "2_150",
-      "2_150_R"
-    ];
-
     var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
 
     for (let i = 0; i < shuffled_practice.length; i++) {
       //cycle through all trials in the practice block
       var current_prac = shuffled_practice[i];
-
       let correct_key = current_prac.endsWith("_R") ? "j" : "f";
 
       // create a trial
@@ -220,7 +225,6 @@ console.log(group0)
 
       //push the test and feedback trials
       timeline.push(prac_test, feedback);
-
       //end the for loop here
     }
 
