@@ -197,9 +197,9 @@
             .last(1)
             .values()[0].correct;
           if (last_trial_correct) {
-            return "<p>Correct!</p>"; // the parameter value has to be returned from the function
+            return "<p><font color='green'>Correct!</font></p>"; // the parameter value has to be returned from the function
           } else {
-            return "<p>Incorrect.</p>"; // the parameter value has to be returned from the function
+            return "<p><font color='red'>Incorrect.</font></p>"; // the parameter value has to be returned from the function
           }
         },
       };
@@ -296,7 +296,7 @@
     var demographic_info = {
       type: jsPsychSurveyMultiChoice,
       preamble:
-        "<br><br><br>Please answer the following demographic questions:", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
+        "<br><br><br><big><strong>Please answer the following demographic questions:</strong></big>", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
       questions: [
         {
           prompt: "What is your age?",
@@ -351,6 +351,15 @@
       ],
     };
     timeline.push(demographic_info);
+
+    /* DEBRIEF */
+    // debrief participants -- just need to style it better for center - aranza
+    var debrief = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "<center>Thank you for participating in this study! We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons. Press any key to complete the experiment.</center>",
+    };
+    // add the debrief trial to the timeline variable
+    timeline.push(debrief);
 
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
     //this portion of the code ensures that the data gets sent to be stored on OSF
