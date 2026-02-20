@@ -41,6 +41,15 @@
     // we decided to create both the stimuli and image list at the same time here so that we do not have to duplicate the nested for-loop
     var stimulus_list = [];
     var image_names = [];
+    // we also create lists to separate the stimuli database into 8 groups based on their condition (4 angles * 2 congruency states)
+    var group0 = [];
+    var group0R = [];
+    var group50 = [];
+    var group50R = [];
+    var group100 = [];
+    var group100R = [];
+    var group150 = [];
+    var group150R = [];
     // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
     for (let i = 1; i < 49; i++) {
       // iterate 4 times because there are 4 rotation angles for each base object
@@ -62,11 +71,16 @@
         };
         // add stimulus file names to the image_names array to preload later.
         image_names.push(image.image_name, imageR.image_name);
-        // push stimulus to our list of stimuli.
+        // push stimulus to our full list of stimuli and its respective group.
         stimulus_list.push(image, imageR);
+        // get the correct list for our current iteration
+        let active_list = `group${j * 50}`
+        let active_listR = `group${j * 50}R`
+        this [active_list].push(image);
+        this [active_listR].push(imageR);
       }
     }
-
+console.log(group0)
     /* Preload images */
     var preload = {
       type: jsPsychPreload,
@@ -136,7 +150,7 @@
 
     /* TODO: basic comprehension survey check */
 
-    /* PRACTICE TRIALS (6) */
+    /* PRACTICE TRIALS (12) */
     var practice_start = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
