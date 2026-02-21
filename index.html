@@ -274,8 +274,17 @@
     var total_trials = 8;
     var completed_trials = 0;
 
+    var min_trial_gap = 250;
+    var max_trial_gap = 500;
+
     // first block: 4 trials
     for (let i = 0; i < total_trials / 2; i++) {
+      // randomly decide a trial gap from 250 ms to 500 ms, inclusive
+      // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+      var trial_gap =
+        Math.floor(Math.random() * (max_trial_gap - min_trial_gap + 1)) +
+        min_trial_gap;
+
       // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
       var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
         stimulus_list,
@@ -305,7 +314,7 @@
           // check if response matches the trial's correct key
           data.correct = data.response === data.correct_key;
         },
-        post_trial_gap: 250, // 250 ms gap
+        post_trial_gap: trial_gap,
       };
       timeline.push(trial);
     }
@@ -320,6 +329,12 @@
 
     // second block: 4 trials
     for (let i = 0; i < total_trials / 2; i++) {
+      // randomly decide a trial gap from 250 ms to 500 ms, inclusive
+      // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+      var trial_gap =
+        Math.floor(Math.random() * (max_trial_gap - min_trial_gap + 1)) +
+        min_trial_gap;
+
       // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
       var stimulus_item = jsPsych.randomization.sampleWithoutReplacement(
         stimulus_list,
@@ -348,7 +363,7 @@
           // check if response matches the trial's correct key
           data.correct = data.response === data.correct_key;
         },
-        post_trial_gap: 250,
+        post_trial_gap: trial_gap,
       };
       timeline.push(trial);
     }
@@ -438,7 +453,8 @@
     /* thank you message */
     var thank_you = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: "Thank you for participating! Press any key to exit fullscreen",
+      stimulus:
+        "Thank you for participating! Press any key to exit fullscreen.",
     };
     // add the thank you to the timeline variable
     timeline.push(thank_you);
