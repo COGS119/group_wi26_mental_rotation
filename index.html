@@ -37,6 +37,16 @@
     /* create timeline */
     var timeline = [];
 
+    // randomly decide what response keys are
+    // using an enum here for organization since response keys can either be one or the other
+    const RESPONSE_KEYS = {
+      DEFAULT: "default", // default: F is same, J is different
+      REVERSED: "reversed", // reversed: F is different, J is same
+    };
+    var response_keys = [RESPONSE_KEYS.DEFAULT, RESPONSE_KEYS.REVERSED];
+    var response_keys_assignment =
+      jsPsych.randomization.sampleWithoutReplacement(response_keys, 1)[0];
+
     /* create stimuli and image list */
     // we decided to create both the stimuli and image list at the same time here so that we do not have to duplicate the nested for-loop
     var stimulus_list = [];
@@ -64,7 +74,7 @@
       "2_50_R",
       "2_100",
       "2_150",
-      "2_150_R"
+      "2_150_R",
     ];
 
     // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
@@ -77,30 +87,32 @@
           object_num: i,
           angle: j * 50,
           correct_response: "same",
-          correct_response_key: "f",
+          correct_response_key:
+            response_keys_assignment == RESPONSE_KEYS.DEFAULT ? "f" : "j",
         };
         imageR = {
           image_name: `stimuli/${i}_${j * 50}_R.jpg`, // use regular expression to determine file name
           object_num: i,
           angle: j * 50,
           correct_response: "different",
-          correct_response_key: "j",
+          correct_response_key:
+            response_keys_assignment == RESPONSE_KEYS.DEFAULT ? "j" : "f",
         };
         // add stimulus file names to the image_names array to preload later.
         image_names.push(image.image_name, imageR.image_name);
         // push stimulus to our full list of stimuli and its respective group.
         stimulus_list.push(image, imageR);
         // get the correct list for our current iteration
-        let active_list = `group${j * 50}`
-        let active_listR = `group${j * 50}R`
+        let active_list = `group${j * 50}`;
+        let active_listR = `group${j * 50}R`;
         // if statements that keep images selected for the practice trial out of the final stimulus lists.
-        if (practice_stimuli.includes(`${i}_${j * 50}`)){
+        if (practice_stimuli.includes(`${i}_${j * 50}`)) {
         } else {
-          this [active_list].push(image);
+          this[active_list].push(image);
         }
-        if (practice_stimuli.includes(`${i}_${j * 50}_R`)){
+        if (practice_stimuli.includes(`${i}_${j * 50}_R`)) {
         } else {
-          this [active_listR].push(imageR);
+          this[active_listR].push(imageR);
         }
       }
     }
@@ -158,15 +170,28 @@
     });
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
 
+    var instructions = `
+      <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
+      <p>If the two shapes are the same, press F.</p>
+      <p>If the two shapes are different, press J.</p>
+      <p>Press any key to continue.</p>
+    `;
+
+    var reversed_instructions = `
+      <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
+      <p>If the two shapes are different, press F.</p>
+      <p>If the two shapes are the same, press J.</p>
+      <p>Press any key to continue.</p>
+    `;
+
     /* INSTRUCTIONS */
     var instructions = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `
-      <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
-      <p>If the two shapes are the same, press 'f'.</p>
-      <p>If the two shapes are different, press 'j'.</p>
-      <p>Press any key to continue.</p>
-    `,
+      // ternary statement that just says if default, display instructions, and otherwise, display reversed instructions
+      stimulus:
+        response_keys_assignment == RESPONSE_KEYS.DEFAULT
+          ? instructions
+          : reversed_instructions,
     };
     // add instructions trial to the tl
     timeline.push(instructions);
@@ -182,6 +207,10 @@
     // add the practice start trial to the timeline variable
     timeline.push(practice_start);
 
+    var default_prompt =
+      "<p>Press F if the shapes are the same, J if the shapes are different.<\p>";
+    var reversed_prompt =
+      "<p>Press F if the shapes are different, J if the shapes the same.<\p>";
     // TODO: make feedback more obvious
     var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
 
@@ -195,13 +224,15 @@
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<img src="stimuli/' + current_prac + '.jpg">',
         prompt:
-          "<p>Press f if the shapes are the same, j if the shapes are different.<\p>",
+          response_keys_assignment == RESPONSE_KEYS.DEFAULT
+            ? default_prompt
+            : reversed_prompt,
         choices: ["f", "j"],
         data: {
           correct_key: correct_key,
         },
         on_finish: function (data) {
-          // keyboard response is the key itself!
+          // check if response matches the trial's correct key
           data.correct = data.response === data.correct_key;
         },
       };
@@ -242,6 +273,7 @@
     // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
     var total_trials = 8;
     var completed_trials = 0;
+
     // first block: 4 trials
     for (let i = 0; i < total_trials / 2; i++) {
       // randomly select a stimulus item (without replacement to ensure no repeats) from the stimulus list
@@ -252,20 +284,26 @@
       // create a mental rotation trial from the stimulus item
       var trial = {
         type: jsPsychImageKeyboardResponse,
+        // ternary statement that just says if default, display default prompt, and otherwise, display reversed prompt
         prompt:
-          "<p>Press f if the shapes are the same, j if the shapes are different.<\p>",
+          response_keys_assignment == RESPONSE_KEYS.DEFAULT
+            ? default_prompt
+            : reversed_prompt,
         choices: ["f", "j"],
         data: {
           correct_response: stimulus_item["correct_response"],
           correct_response_key: stimulus_item["correct_response_key"],
         },
         stimulus: stimulus_item["image_name"],
-        on_finish: function () {
+        on_finish: function (data) {
           // https://www.jspsych.org/v8/overview/progress-bar/
           // at the end of each trial, update the progress bar
           // increment number of completed trials by 1 and divide by total # of trials
           completed_trials++;
           jsPsych.progressBar.progress = completed_trials / total_trials;
+
+          // check if response matches the trial's correct key
+          data.correct = data.response === data.correct_key;
         },
         post_trial_gap: 250, // 250 ms gap
       };
@@ -291,19 +329,24 @@
       var trial = {
         type: jsPsychImageKeyboardResponse,
         prompt:
-          "<p>Press f if the shapes are the same, j if the shapes are different.<\p>",
+          response_keys_assignment == RESPONSE_KEYS.DEFAULT
+            ? default_prompt
+            : reversed_prompt,
         choices: ["f", "j"],
         data: {
           correct_response: stimulus_item["correct_response"],
           correct_response_key: stimulus_item["correct_response_key"],
         },
         stimulus: stimulus_item["image_name"],
-        on_finish: function () {
+        on_finish: function (data) {
           // https://www.jspsych.org/v8/overview/progress-bar/
           // at the end of each trial, update the progress bar
           // increment number of completed trials by 1 and divide by total # of trials
           completed_trials++;
           jsPsych.progressBar.progress = completed_trials / total_trials;
+
+          // check if response matches the trial's correct key
+          data.correct = data.response === data.correct_key;
         },
         post_trial_gap: 250,
       };
@@ -374,7 +417,8 @@
     // debrief participants -- just need to style it better for center - aranza
     var debrief = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: "<center>Thank you for participating in this study! We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons. Press any key to complete the experiment.</center>",
+      stimulus:
+        "<center>Thank you for participating in this study! We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons. Press any key to complete the experiment.</center>",
     };
     // add the debrief trial to the timeline variable
     timeline.push(debrief);
@@ -391,10 +435,10 @@
     timeline.push(save_data);
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
 
-    /* TODO: thank you message */
+    /* thank you message */
     var thank_you = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: "Thank you for participating!",
+      stimulus: "Thank you for participating! Press any key to exit fullscreen",
     };
     // add the thank you to the timeline variable
     timeline.push(thank_you);
