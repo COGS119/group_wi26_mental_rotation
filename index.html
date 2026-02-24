@@ -64,17 +64,13 @@
     // manually selecting stimuli of interest for the practice trials: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
     var practice_stimuli = [
       "1_0_R",
-      "1_0",
+      "2_0",
       "1_50",
-      "1_100_R",
-      "1_150_R",
-      "1_150",
-      "2_0_R",
-      "2_50",
       "2_50_R",
+      "1_100_R",
       "2_100",
-      "2_150",
       "2_150_R",
+      "1_150",
     ];
 
     // iterate 48 times to iterate through all 48 groups of stimuli (by baseline object)
@@ -256,11 +252,11 @@
 
         var correct_same =
           responses.same_definition ===
-          "The two shapes are identical but may be rotated";
+          "The two shapes are identical but may be rotated.";
 
         var correct_different =
           responses.different_definition ===
-          "The two shapes are different objects";
+          "The two shapes are different objects.";
 
         var correct_same_key =
           response_keys_assignment == RESPONSE_KEYS.DEFAULT
@@ -274,7 +270,7 @@
 
         var correct_speed =
           responses.speed_accuracy ===
-          "Respond as quickly and accurately as possible";
+          "Respond as quickly and accurately as possible.";
 
         data.comprehension_pass =
           correct_same &&
@@ -287,11 +283,11 @@
 
     timeline.push(comprehensive_survey_check);
 
-    /* PRACTICE TRIALS (12) */
+    /* PRACTICE TRIALS (8) */
     var practice_start = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
-        "There will be 12 practice trials before the real experiment. Press any key to begin.",
+        "There will be 8 practice trials before the real experiment. Press any key to begin.",
     };
     // add the practice start trial to the timeline variable
     timeline.push(practice_start);
@@ -363,8 +359,7 @@
     // add the trials start trial to the timeline variable
     timeline.push(trials_start);
 
-    // TODO: ADD OTHER DATA FIELDS (E.G. ISCORRECT)
-    var total_trials = 16;
+    var total_trials = 96;
     var completed_trials = 0;
     //Randomly selecting the experimental stimuli to show to the participant.
     var stimulus_list = [];
@@ -390,6 +385,7 @@
 
     // Check to make sure the same condition does not occur more than 3 times in a row. If it does, then reshuffle the stimuli and try again.
     var repeats = true;
+    var counter = 0;
     while (repeats == true) {
       stimulus_list = jsPsych.randomization.shuffle(stimulus_list);
       //By default, if no violations are raised, the while loop should only run once.
@@ -411,7 +407,9 @@
           break;
         }
       }
+      counter++
     }
+    console.log(counter)
 
     var min_trial_gap = 250;
     var max_trial_gap = 500;
@@ -556,16 +554,6 @@
     };
     timeline.push(demographic_info);
 
-    /* DEBRIEF */
-    // debrief participants -- just need to style it better for center - aranza
-    var debrief = {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus:
-        "<center>Thank you for participating in this study! We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons. Press any key to complete the experiment.</center>",
-    };
-    // add the debrief trial to the timeline variable
-    timeline.push(debrief);
-
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
     //this portion of the code ensures that the data gets sent to be stored on OSF
     const save_data = {
@@ -577,6 +565,16 @@
     };
     timeline.push(save_data);
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
+
+    /* DEBRIEF */
+    // debrief participants -- just need to style it better for center - aranza
+    var debrief = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus:
+        "<center>Thank you for participating in this study! We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons. Press any key to complete the experiment.</center>",
+    };
+    // add the debrief trial to the timeline variable
+    timeline.push(debrief);
 
     /* thank you message */
     var thank_you = {
