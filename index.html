@@ -12,8 +12,9 @@
     <!-- fullscreen plug in -->
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
     <!-- survey plugin for basic compehensive suvery check -->
-    <!--survey plugin for multiple choice demographic data-->
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
+    <!--survey plugin for demographic data-->
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
     <link
       href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css"
       rel="stylesheet"
@@ -498,61 +499,49 @@
 
     // Collect demographic information about participants
     var demographic_info = {
-      type: jsPsychSurveyMultiChoice,
-      preamble:
-        "<br><br><br><big><strong>Please answer the following demographic questions:</strong></big>", //in the experiment the preamble prompt is all the way at the top edge of the screen so I need to figure out how to style it to have some more padding around edge of the screen -aranza
-      questions: [
-        {
-          prompt: "What is your age?",
-          name: "Age",
-          options: ["18-21", "22-25", "26-30", "31+"],
-          required: true,
-        },
-        {
-          prompt: "What year in college/university are you?",
-          name: "Year",
-          options: [
-            "1st year",
-            "2nd year",
-            "3rd year",
-            "4th year",
-            "5th year+",
-          ],
-          required: true,
-        },
-        {
-          prompt: "What is your specialization in Cognitive Science?", //this is assuming everyone in the class is a CogSci major, may change in the future? -aranza
-          name: "Major",
-          options: [
-            "Neuroscience",
-            "Clinical Aspects of Cognition",
-            "Design & Interaction",
-            "Machine Learning & Neural Computation",
-            "Cognitive Behavioral Neuroscience",
-            "Language & Culture",
-            "None, B.S. in CogSci",
-          ],
-          required: true,
-        },
-        {
-          prompt: "Do you have a minor?", //need to add text option for minor, but idk if i should do that in a separate function/ plugin...? -aranza
-          name: "Minor",
-          options: ["Yes", "No"],
-          required: true,
-        },
-        {
-          prompt: "Which gender do you most identify with?", //i can change the options or simply to sex for easier data analysis, i got this from SONA Systems example -aranza
-          name: "Gender",
-          options: [
-            "Man",
-            "Woman",
-            "Non-binary/ Non-conforming",
-            "Transgender",
-            "Prefer not to say",
-          ],
-          required: true,
-        },
-      ],
+      type: jsPsychSurveyHtmlForm,
+      preamble: "<h3 sytle=>Please answer the following demographic questions:</h3>",
+      html: `
+      <div style="text-align: left;">
+        <p>What is your age?</p>
+        <input name="age" type="number" required />
+
+        <p>What year in college/university are you?</p>
+        <select name="year" required>
+          <option value="">Select one</option>
+          <option>1st year</option>
+          <option>2nd year</option>
+          <option>3rd year</option>
+          <option>4th year</option>
+          <option>5th year+</option>
+        </select>
+
+        <p>What is your specialization in Cognitive Science?</p>
+        <select name="major" required>
+          <option value="">Select one</option>
+          <option>Neuroscience</option>
+          <option>Clinical Aspects of Cognition</option>
+          <option>Design & Interaction</option>
+          <option>Machine Learning & Neural Computation</option>
+          <option>Cognitive Behavioral Neuroscience</option>
+          <option>Language & Culture</option>
+          <option>None, B.S. in CogSci</option>
+        </select>
+
+        <p>Do you have a minor? (Optional)</p>
+        <input name="minor" type="text" />
+
+        <p>Which gender do you most identify with?</p>
+        <select name="gender" required>
+          <option value="">Select one</option>
+          <option>Man</option>
+          <option>Woman</option>
+          <option>Non-binary / Non-conforming</option>
+          <option>Transgender</option>
+          <option>Prefer not to say</option>
+        </select>
+      </div>
+      `
     };
     timeline.push(demographic_info);
 
@@ -573,7 +562,13 @@
     var debrief = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
-        "<center>Thank you for participating in this study! We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons. Press any key to complete the experiment.</center>",
+        `<center>
+          <p>Thank you for participating in this study!</p>
+          <p>We had you complete <i>all</i> those trials in order to investigate mental rotation abilities.</p>
+          <p>With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons.</p>
+          <p>Press any key to complete the experiment.</p> 
+          </center>
+          `
     };
     // add the debrief trial to the timeline variable
     timeline.push(debrief);
