@@ -388,6 +388,7 @@
     var counter = 0;
     while (repeats == true) {
       stimulus_list = jsPsych.randomization.shuffle(stimulus_list);
+      counter++
       //By default, if no violations are raised, the while loop should only run once.
       repeats = false;
       var a;
@@ -407,9 +408,10 @@
           break;
         }
       }
-      counter++
+      if (counter > 15000) {
+        break
+      }
     }
-    console.log(counter)
 
     var min_trial_gap = 250;
     var max_trial_gap = 500;
