@@ -168,15 +168,15 @@
 
     var instructions = `
       <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
-      <p>If the two shapes are the same, press F.</p>
-      <p>If the two shapes are different, press J.</p>
+      <p>If the two shapes are the same, press <strong>F</strong>.</p>
+      <p>If the two shapes are different, press <strong>J</strong>.</p>
       <p>Press any key to continue.</p>
     `;
 
     var reversed_instructions = `
       <p>On each trial, you will see two 3D shapes. The shape on the left will be your <strong>baseline shape</strong>. The shape on the right will be the <strong>target shape</strong>.</p>
-      <p>If the two shapes are different, press F.</p>
-      <p>If the two shapes are the same, press J.</p>
+      <p>If the two shapes are different, press <strong>F</strong>.</p>
+      <p>If the two shapes are the same, press <strong>J</strong>.</p>
       <p>Press any key to continue.</p>
     `;
 
@@ -293,9 +293,9 @@
     timeline.push(practice_start);
 
     var default_prompt =
-      "<p>Press F if the shapes are the same, J if the shapes are different.<\p>";
+      "<p>Press <strong>F</strong> if the shapes are the same, <strong>J</strong> if the shapes are different.</p>";
     var reversed_prompt =
-      "<p>Press F if the shapes are different, J if the shapes the same.<\p>";
+      "<p>Press <strong>F</strong> if the shapes are different,  <strong>J</strong> if the shapes the same.</p>";
     // TODO: make feedback more obvious
     var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
 
@@ -338,9 +338,9 @@
             .last(1)
             .values()[0].correct;
           if (last_trial_correct) {
-            return "<p><font color='green'>Correct!</font></p>"; // the parameter value has to be returned from the function
+            return '<p style="font-size: 50px; color: green;">Correct!</p>'; // the parameter value has to be returned from the function
           } else {
-            return "<p><font color='red'>Incorrect.</font></p>"; // the parameter value has to be returned from the function
+            return '<p style="font-size: 50px; color: red;">Incorrect</p>'; // the parameter value has to be returned from the function
           }
         },
       };
