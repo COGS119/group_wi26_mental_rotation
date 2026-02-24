@@ -196,7 +196,96 @@
     // add instructions trial to the tl
     timeline.push(instructions);
 
-    /* TODO: basic comprehension survey check */
+    /* COMPREHENSIVE SURVEY CHECK */
+
+    var comprehensive_survey_check = {
+      type: jsPsychSurveyMultiChoice,
+      preamble:
+        "<strong>Please answer the following questions to confirm you understand the task:</strong>",
+      questions: [
+        {
+          prompt: "What counts as 'same' in this experiment?",
+          name: "same_definition",
+          options: [
+            "The two shapes are identical but may be rotated",
+            "The shapes are completely different objects",
+            "The shapes are different colors",
+          ],
+          required: true,
+        },
+
+        {
+          prompt: "What counts as 'different' in this experiment?",
+          name: "different_definition",
+          options: [
+            "The shapes are identical but rotated",
+            "The two shapes are different objects",
+            "The shapes are different sizes",
+          ],
+          required: true,
+        },
+
+        {
+          prompt: "Which key do you press if the shapes are SAME?",
+          name: "same_key",
+          options: ["F key", "J key"],
+          required: true,
+        },
+
+        {
+          prompt: "Which key do you press if the shapes are DIFFERENT?",
+          name: "different_key",
+          options: ["F key", "J key"],
+          required: true,
+        },
+
+        {
+          prompt: "How should you respond during each trial?",
+          name: "speed_accuracy",
+          options: [
+            "Focus only on speed",
+            "Focus only on accuracy",
+            "Respond as quickly and accurately as possible",
+          ],
+          required: true,
+        },
+      ],
+
+      on_finish: function (data) {
+        var responses = data.response;
+
+        var correct_same =
+          responses.same_definition ===
+          "The two shapes are identical but may be rotated";
+
+        var correct_different =
+          responses.different_definition ===
+          "The two shapes are different objects";
+
+        var correct_same_key =
+          response_keys_assignment == RESPONSE_KEYS.DEFAULT
+            ? responses.same_key === "F key"
+            : responses.same_key === "J key";
+
+        var correct_different_key =
+          response_keys_assignment == RESPONSE_KEYS.DEFAULT
+            ? responses.different_key === "J key"
+            : responses.different_key === "F key";
+
+        var correct_speed =
+          responses.speed_accuracy ===
+          "Respond as quickly and accurately as possible";
+
+        data.comprehension_pass =
+          correct_same &&
+          correct_different &&
+          correct_same_key &&
+          correct_different_key &&
+          correct_speed;
+      },
+    };
+
+    timeline.push(comprehensive_survey_check);
 
     /* PRACTICE TRIALS (12) */
     var practice_start = {
@@ -217,7 +306,13 @@
     for (let i = 0; i < shuffled_practice.length; i++) {
       //cycle through all trials in the practice block
       var current_prac = shuffled_practice[i];
-      let correct_key = current_prac.endsWith("_R") ? (response_keys_assignment == RESPONSE_KEYS.DEFAULT ? "j" : "f") : (response_keys_assignment == RESPONSE_KEYS.DEFAULT ? "f" : "j");
+      let correct_key = current_prac.endsWith("_R")
+        ? response_keys_assignment == RESPONSE_KEYS.DEFAULT
+          ? "j"
+          : "f"
+        : response_keys_assignment == RESPONSE_KEYS.DEFAULT
+          ? "f"
+          : "j";
 
       // create a trial
       var prac_test = {
@@ -274,43 +369,49 @@
     //Randomly selecting the experimental stimuli to show to the participant.
     var stimulus_list = [];
     for (let i = 0; i < 4; i++) {
-        // get the correct list for our current iteration
-        let active_list = `group${i * 50}`;
-        let active_listR = `group${i * 50}R`;
-        // select 12 stimuli at random from each list and push it into a temporary array variable.
-        let a = jsPsych.randomization.sampleWithoutReplacement(this[active_list], total_trials/8);
-        let b = jsPsych.randomization.sampleWithoutReplacement(this[active_listR], total_trials/8);
-        // Loop through the list of randomly selected stimuli to add each object to the list because the output of sampleWithoutReplacement is an array.
-        for (let j = 0; j < total_trials/8; j++) {
-          stimulus_list.push(a[j])
-          stimulus_list.push(b[j])
-        }
+      // get the correct list for our current iteration
+      let active_list = `group${i * 50}`;
+      let active_listR = `group${i * 50}R`;
+      // select 12 stimuli at random from each list and push it into a temporary array variable.
+      let a = jsPsych.randomization.sampleWithoutReplacement(
+        this[active_list],
+        total_trials / 8,
+      );
+      let b = jsPsych.randomization.sampleWithoutReplacement(
+        this[active_listR],
+        total_trials / 8,
+      );
+      // Loop through the list of randomly selected stimuli to add each object to the list because the output of sampleWithoutReplacement is an array.
+      for (let j = 0; j < total_trials / 8; j++) {
+        stimulus_list.push(a[j]);
+        stimulus_list.push(b[j]);
       }
+    }
 
     // Check to make sure the same condition does not occur more than 3 times in a row. If it does, then reshuffle the stimuli and try again.
     var repeats = true;
-    while (repeats == true){
-      stimulus_list = jsPsych.randomization.shuffle(stimulus_list)
+    while (repeats == true) {
+      stimulus_list = jsPsych.randomization.shuffle(stimulus_list);
       //By default, if no violations are raised, the while loop should only run once.
-      repeats = false
+      repeats = false;
       var a;
       var b;
       var c;
       var d;
       for (let i = 0; i < stimulus_list.length; i++) {
         //Use variables to save info for the last three items.
-        let target = stimulus_list[i].image_name
-        a = b
-        b = c
-        c = d
+        let target = stimulus_list[i].image_name;
+        a = b;
+        b = c;
+        c = d;
         d = target.endsWith("_R.jpg") ? "incongruent" : "congruent";
         //If there is a 4-in-a-row match, set repeats to true so the while loop will run again and break out of the for loop to save time.
-        if (a == b && b == c && c == d){
-          repeats = true
-          break
-        };
-      };
-    };
+        if (a == b && b == c && c == d) {
+          repeats = true;
+          break;
+        }
+      }
+    }
 
     var min_trial_gap = 250;
     var max_trial_gap = 500;
@@ -320,31 +421,34 @@
       timeline: [
         {
           type: jsPsychImageKeyboardResponse,
-          prompt: 
+          prompt:
             response_keys_assignment == RESPONSE_KEYS.DEFAULT
-                ? default_prompt
-                : reversed_prompt,
+              ? default_prompt
+              : reversed_prompt,
           choices: ["f", "j"],
           data: {
             object_num: jsPsych.timelineVariable(`object_num`),
             angle: jsPsych.timelineVariable(`angle`),
             correct_response: jsPsych.timelineVariable(`correct_response`),
-            correct_response_key: jsPsych.timelineVariable(`correct_response_key`)
+            correct_response_key:
+              jsPsych.timelineVariable(`correct_response_key`),
           },
           stimulus: jsPsych.timelineVariable(`image_name`),
           on_finish: function (data) {
-              // https://www.jspsych.org/v8/overview/progress-bar/
-              // at the end of each trial, update the progress bar
-              // increment number of completed trials by 1 and divide by total # of trials
-              completed_trials++;
-              jsPsych.progressBar.progress = completed_trials / total_trials;
-              // check if response matches the trial's correct key
-              data.correct = data.response === data.correct_key;
+            // https://www.jspsych.org/v8/overview/progress-bar/
+            // at the end of each trial, update the progress bar
+            // increment number of completed trials by 1 and divide by total # of trials
+            completed_trials++;
+            jsPsych.progressBar.progress = completed_trials / total_trials;
+            // check if response matches the trial's correct key
+            data.correct = data.response === data.correct_key;
           },
-          post_trial_gap: Math.floor(Math.random() * (max_trial_gap - min_trial_gap + 1)) + min_trial_gap
-        }
+          post_trial_gap:
+            Math.floor(Math.random() * (max_trial_gap - min_trial_gap + 1)) +
+            min_trial_gap,
+        },
       ],
-      timeline_variables: stimulus_list.slice(0,total_trials/2)
+      timeline_variables: stimulus_list.slice(0, total_trials / 2),
     };
     timeline.push(blockA);
 
@@ -361,31 +465,34 @@
       timeline: [
         {
           type: jsPsychImageKeyboardResponse,
-          prompt: 
+          prompt:
             response_keys_assignment == RESPONSE_KEYS.DEFAULT
-                ? default_prompt
-                : reversed_prompt,
+              ? default_prompt
+              : reversed_prompt,
           choices: ["f", "j"],
           data: {
             object_num: jsPsych.timelineVariable(`object_num`),
             angle: jsPsych.timelineVariable(`angle`),
             correct_response: jsPsych.timelineVariable(`correct_response`),
-            correct_response_key: jsPsych.timelineVariable(`correct_response_key`)
+            correct_response_key:
+              jsPsych.timelineVariable(`correct_response_key`),
           },
           stimulus: jsPsych.timelineVariable(`image_name`),
           on_finish: function (data) {
-              // https://www.jspsych.org/v8/overview/progress-bar/
-              // at the end of each trial, update the progress bar
-              // increment number of completed trials by 1 and divide by total # of trials
-              completed_trials++;
-              jsPsych.progressBar.progress = completed_trials / total_trials;
-              // check if response matches the trial's correct key
-              data.correct = data.response === data.correct_key;
+            // https://www.jspsych.org/v8/overview/progress-bar/
+            // at the end of each trial, update the progress bar
+            // increment number of completed trials by 1 and divide by total # of trials
+            completed_trials++;
+            jsPsych.progressBar.progress = completed_trials / total_trials;
+            // check if response matches the trial's correct key
+            data.correct = data.response === data.correct_key;
           },
-          post_trial_gap: Math.floor(Math.random() * (max_trial_gap - min_trial_gap + 1)) + min_trial_gap
-        }
+          post_trial_gap:
+            Math.floor(Math.random() * (max_trial_gap - min_trial_gap + 1)) +
+            min_trial_gap,
+        },
       ],
-      timeline_variables: stimulus_list.slice(total_trials/2)
+      timeline_variables: stimulus_list.slice(total_trials / 2),
     };
     timeline.push(blockB);
 
