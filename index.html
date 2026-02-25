@@ -12,6 +12,7 @@
     <!-- fullscreen plug in -->
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
     <!-- survey plugin for basic compehensive suvery check -->
+     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
     <!--survey plugin for multiple choice demographic data-->
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
     <link
@@ -196,8 +197,7 @@
     // add instructions trial to the tl
     timeline.push(instructions);
 
-    /* COMPREHENSIVE SURVEY CHECK */
-
+    /* Comprehensive Survey Check */
     var comprehensive_survey_check = {
       type: jsPsychSurveyMultiChoice,
       preamble:
@@ -256,11 +256,11 @@
 
         var correct_same =
           responses.same_definition ===
-          "The two shapes are identical but may be rotated";
+          "The two shapes are identical but may be rotated.";
 
         var correct_different =
           responses.different_definition ===
-          "The two shapes are different objects";
+          "The two shapes are different objects.";
 
         var correct_same_key =
           response_keys_assignment == RESPONSE_KEYS.DEFAULT
@@ -274,7 +274,7 @@
 
         var correct_speed =
           responses.speed_accuracy ===
-          "Respond as quickly and accurately as possible";
+          "Respond as quickly and accurately as possible.";
 
         data.comprehension_pass =
           correct_same &&
@@ -287,7 +287,6 @@
 
     timeline.push(comprehensive_survey_check);
 
-    /* PRACTICE TRIALS (12) */
     var practice_start = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
