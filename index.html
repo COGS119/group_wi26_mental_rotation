@@ -445,6 +445,9 @@
       }
     }
 
+    // participant's total score
+    var total_score = 0;
+    // gap between trials is minimum 250 ms and maximum 500 ms, inclusive
     var min_trial_gap = 250;
     var max_trial_gap = 500;
 
@@ -474,6 +477,7 @@
             jsPsych.progressBar.progress = completed_trials / total_trials;
             // check if response matches the trial's correct response key
             data.correct = data.response === data.correct_response_key;
+            if (data.correct) total_score++;
           },
           post_trial_gap:
             // randomly select the trial gap from 250 to 500 ms, inclusive
@@ -538,6 +542,7 @@
             jsPsych.progressBar.progress = completed_trials / total_trials;
             // check if response matches the trial's correct response key
             data.correct = data.response === data.correct_response_key;
+            if (data.correct) total_score++;
           },
           post_trial_gap:
             // randomly select the trial gap from 250 to 500 ms, inclusive
@@ -598,6 +603,7 @@
           <option>Cognitive Behavioral Neuroscience</option>
           <option>Language & Culture</option>
           <option>None, B.S. in CogSci</option>
+          <option>Other: not majoring in CogSci</option>
         </select>
 
         <p>Do you have a minor? (leave blank if none)</p>
@@ -639,13 +645,16 @@
     // debrief participants
     var debrief = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `<center>
-          <p>Thank you for participating in this study!</p>
-          <p>This study was a replication of Ganis & Kievit (2015).</p>
-          <p>We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand whether people actually rotate objects in their head when thinking about and comparing objects of varying angles.</p>
-          <p>Press any key to complete the experiment.</p> 
-          </center>
-          `,
+      stimulus: function () {
+        return `<center>
+        <p>Thank you for participating in this study!</p>
+        <p>Your total score was <strong>${total_score} / 96</strong>.</p>
+        <p>This study was a replication of Ganis & Kievit (2015).</p>
+        <p>We had you complete <i>all</i> those trials in order to investigate mental rotation abilities.</p>
+        <p>With your help, we can better understand whether people actually rotate objects in their head when thinking about and comparing objects of varying angles.</p>
+        <p>Press any key to complete the experiment.</p> 
+        </center>`;
+      },
     };
     // add the debrief trial to the timeline variable
     timeline.push(debrief);
