@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
     <!-- fullscreen plug in -->
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.2.1"></script>
-    <!-- survey plugin for basic compehensive suvery check -->
+    <!-- survey plugin for basic compehension suvery check -->
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
     <!--survey plugin for demographic data-->
     <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
@@ -62,7 +62,7 @@
     var group150 = [];
     var group150R = [];
 
-    // manually selecting stimuli of interest for the practice trials: [1_0_R, 1_0, 1_50, 1_100_R, 1_150_R, 1_150]
+    // manually selecting stimuli of interest for the practice trials
     var practice_stimuli = [
       "1_0_R",
       "2_0",
@@ -146,7 +146,6 @@
         },
       ],
       on_finish: function (data) {
-        console.log(data.response);
         jsPsych.data.addProperties({
           participant: data.response.participant_id,
         });
@@ -193,56 +192,54 @@
     // add instructions trial to the tl
     timeline.push(instructions);
 
-    /* COMPREHENSIVE SURVEY CHECK */
+    /* COMPREHENSION SURVEY CHECK */
+    // mark comprehension survey passed as false
+    var comprehension_passed = false;
 
-    var comprehensive_survey_check = {
+    var comprehension_survey_check = {
       type: jsPsychSurveyMultiChoice,
       preamble:
-        "<strong>Please answer the following questions to confirm you understand the task:</strong>",
+        "<strong>Please answer the following questions to confirm you understand the task:</strong>\n",
       questions: [
         {
           prompt: "What counts as 'same' in this experiment?",
           name: "same_definition",
           options: [
-            "The two shapes are identical but may be rotated",
-            "The shapes are completely different objects",
-            "The shapes are different colors",
+            "The two shapes are identical but may be rotated.",
+            "The shapes are completely different objects.",
+            "The shapes are different colors.",
           ],
           required: true,
         },
-
         {
           prompt: "What counts as 'different' in this experiment?",
           name: "different_definition",
           options: [
-            "The shapes are identical but rotated",
-            "The two shapes are different objects",
-            "The shapes are different sizes",
+            "The shapes are identical but rotated.",
+            "The two shapes are different objects.",
+            "The shapes are different sizes.",
           ],
           required: true,
         },
-
         {
           prompt: "Which key do you press if the shapes are SAME?",
           name: "same_key",
           options: ["F key", "J key"],
           required: true,
         },
-
         {
           prompt: "Which key do you press if the shapes are DIFFERENT?",
           name: "different_key",
           options: ["F key", "J key"],
           required: true,
         },
-
         {
           prompt: "How should you respond during each trial?",
           name: "speed_accuracy",
           options: [
-            "Focus only on speed",
-            "Focus only on accuracy",
-            "Respond as quickly and accurately as possible",
+            "Focus only on speed.",
+            "Focus only on accuracy.",
+            "Respond as quickly and accurately as possible.",
           ],
           required: true,
         },
@@ -273,7 +270,8 @@
           responses.speed_accuracy ===
           "Respond as quickly and accurately as possible.";
 
-        data.comprehension_pass =
+        // update comprehension passed
+        comprehension_passed =
           correct_same &&
           correct_different &&
           correct_same_key &&
@@ -282,7 +280,35 @@
       },
     };
 
-    timeline.push(comprehensive_survey_check);
+    // feedback for comprehension survey
+    var comprehension_survey_feedback = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+        return comprehension_passed
+          ? "<p><font color='green'>All correct! Press any key to continue.</font></p>"
+          : "<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>";
+      },
+    };
+    // conditonal trial of whether or not to repeat the instructions
+    var repeat_instructions = {
+      timeline: [instructions],
+      conditional_function: function () {
+        return !comprehension_passed;
+      },
+    };
+    // continuously loop the survey until the participant answers comprehension survey correctly
+    var comprehension_survey_check_loop = {
+      timeline: [
+        comprehension_survey_check,
+        comprehension_survey_feedback,
+        repeat_instructions,
+      ],
+      loop_function: function () {
+        return !comprehension_passed;
+      },
+    };
+
+    timeline.push(comprehension_survey_check_loop);
 
     /* PRACTICE TRIALS (8) */
     var practice_start = {
@@ -417,7 +443,7 @@
     var min_trial_gap = 250;
     var max_trial_gap = 500;
 
-    // First experimental trial block. Uses the first half ot the experimental stimuli list.
+    // First experimental trial block. Uses the first half of the experimental stimuli list.
     var blockA = {
       timeline: [
         {
