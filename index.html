@@ -167,8 +167,8 @@
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
 
     var instructions = `
-      <p>On each trial, you will see two 3D objects. The shape on the left will be your <strong>baseline object</strong>. The shape on the right will be the <strong>target object</strong>.</p>
-      <p>These objects maybe at different orientations from each other.</p> 
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
       <p>If the two object are the same, press <strong>F</strong>.</p>
       <p>If the two object are different, press <strong>J</strong>.</p>
       <p>Please respond as fast as possible without sacrificing accuracy.</p>
@@ -176,8 +176,8 @@
     `;
 
     var reversed_instructions = `
-      <p>On each trial, you will see two 3D object. The shape on the left will be your <strong>baseline object</strong>. The shape on the right will be the <strong>target object</strong>.</p>
-      <p>These objects maybe at different orientations from each other.</p> 
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
       <p>If the two object are different, press <strong>F</strong>.</p>
       <p>If the two object are the same, press <strong>J</strong>.</p>
       <p>Please respond as fast as possible without sacrificing accuracy.</p>
@@ -209,9 +209,9 @@
           prompt: "What counts as 'same' in this experiment?",
           name: "same_definition",
           options: [
-            "The two shapes are identical but may be rotated.",
-            "The shapes are completely different objects.",
-            "The shapes are different colors.",
+            "The two objects are identical but may be rotated.",
+            "The objects are completely different objects.",
+            "The objects are different colors.",
           ],
           required: true,
         },
@@ -219,20 +219,20 @@
           prompt: "What counts as 'different' in this experiment?",
           name: "different_definition",
           options: [
-            "The shapes are identical but rotated.",
-            "The two shapes are different objects.",
-            "The shapes are different sizes.",
+            "The objects are identical but rotated.",
+            "The two objects are different objects.",
+            "The objects are different sizes.",
           ],
           required: true,
         },
         {
-          prompt: "Which key do you press if the shapes are SAME?",
+          prompt: "Which key do you press if the objects are SAME?",
           name: "same_key",
           options: ["F key", "J key"],
           required: true,
         },
         {
-          prompt: "Which key do you press if the shapes are DIFFERENT?",
+          prompt: "Which key do you press if the objects are DIFFERENT?",
           name: "different_key",
           options: ["F key", "J key"],
           required: true,
@@ -254,11 +254,11 @@
 
         var correct_same =
           responses.same_definition ===
-          "The two shapes are identical but may be rotated.";
+          "The two objects are identical but may be rotated.";
 
         var correct_different =
           responses.different_definition ===
-          "The two shapes are different objects.";
+          "The two objects are different objects.";
 
         var correct_same_key =
           response_keys_assignment == RESPONSE_KEYS.DEFAULT
@@ -324,9 +324,9 @@
     timeline.push(practice_start);
 
     var default_prompt =
-      "<p>Press <strong>F</strong> if the shapes are the same, <strong>J</strong> if the shapes are different.</p>";
+      "<p>Press <strong>F</strong> if the objects are the same, <strong>J</strong> if the objects are different.</p>";
     var reversed_prompt =
-      "<p>Press <strong>F</strong> if the shapes are different,  <strong>J</strong> if the shapes the same.</p>";
+      "<p>Press <strong>F</strong> if the objects are different,  <strong>J</strong> if the objects are the same.</p>";
     // TODO: make feedback more obvious
     var shuffled_practice = jsPsych.randomization.repeat(practice_stimuli, 1);
 
