@@ -28,6 +28,7 @@
   <script>
     /* initialize jsPsych */
     var jsPsych = initJsPsych({
+      // added a progress bar so users can monitor their duration/progression of experiment
       show_progress_bar: true,
       auto_update_progress_bar: false,
       on_finish: function () {
@@ -40,6 +41,7 @@
 
     // randomly decide what response keys are
     // using an enum here for organization since response keys can either be one or the other
+    // we deviated from the original study by using F and J as our response keys rather than B and N because they have tactile markers and are further apart on the keyboard
     const RESPONSE_KEYS = {
       DEFAULT: "default", // default: F is same, J is different
       REVERSED: "reversed", // reversed: F is different, J is same
@@ -316,6 +318,7 @@
     timeline.push(comprehension_survey_check_loop);
 
     /* PRACTICE TRIALS (8) */
+    // we deviated from the original study by having 8 instead of 12 practice trials for the purpose of equally selecting one stimuli from all 8 groups
     var practice_start = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
@@ -386,7 +389,7 @@
     var trials_start = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
-        "We will now begin the real experiment. For the real experiment, there will only be feedback if you answer incorrectly. Press any key to begin.",
+        "We will now begin the real experiment. Unlike the practice, feedback will only appear for incorrect answers, and trials will time out if you take too long. Press any key to begin.",
     };
     // add the trials start trial to the timeline variable
     timeline.push(trials_start);
@@ -469,6 +472,7 @@
               jsPsych.timelineVariable(`correct_response_key`),
           },
           stimulus: jsPsych.timelineVariable(`image_name`),
+          trial_duration: 7500,
           on_finish: function (data) {
             // https://www.jspsych.org/v8/overview/progress-bar/
             // at the end of each trial, update the progress bar
@@ -508,6 +512,7 @@
     };
     timeline.push(blockA);
 
+    // we deviated from the original study by adding a brief break in between the two blocks to alleviate potential mental fatigue
     var block_gap = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
@@ -534,6 +539,7 @@
               jsPsych.timelineVariable(`correct_response_key`),
           },
           stimulus: jsPsych.timelineVariable(`image_name`),
+          trial_duration: 7500,
           on_finish: function (data) {
             // https://www.jspsych.org/v8/overview/progress-bar/
             // at the end of each trial, update the progress bar
