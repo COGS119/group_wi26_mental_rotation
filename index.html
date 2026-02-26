@@ -209,9 +209,9 @@
           prompt: "What counts as 'same' in this experiment?",
           name: "same_definition",
           options: [
-            "The two objects are identical but may be rotated.",
+            "The two objects are physically identical.",
             "The objects are completely different objects.",
-            "The objects are different colors.",
+            "The objects are the same size.",
           ],
           required: true,
         },
@@ -219,8 +219,8 @@
           prompt: "What counts as 'different' in this experiment?",
           name: "different_definition",
           options: [
-            "The objects are identical but rotated.",
-            "The two objects are different objects.",
+            "The objects are physically identical but presented at a different orientation.",
+            "The two objects are physically distinct objects.",
             "The objects are different sizes.",
           ],
           required: true,
@@ -255,11 +255,11 @@
         // manually check the responses
         var correct_same =
           responses.same_definition ===
-          "The two objects are identical but may be rotated.";
+          "The two objects are physically identical.";
 
         var correct_different =
           responses.different_definition ===
-          "The two objects are different objects.";
+          "The two objects are physically distinct objects.";
 
         var correct_same_key =
           response_keys_assignment == RESPONSE_KEYS.DEFAULT
@@ -600,7 +600,7 @@
           <option>None, B.S. in CogSci</option>
         </select>
 
-        <p>Do you have a minor? (Optional)</p>
+        <p>Do you have a minor? (leave blank if none)</p>
         <input name="minor" type="text" />
 
         <p>Which gender do you most identify with?</p>
@@ -612,6 +612,12 @@
           <option>Transgender</option>
           <option>Prefer not to say</option>
         </select>
+
+        <p>What do you think the study was about?</p>
+        <input name="about" type="text" required/>
+
+        <p>Did you experience any technical difficulties during the experiment? Was there any confusion during the experiment or anything that may have prevented you from completing the experiment successfully? (Optional)</p>
+        <input name="difficulties" type="text"/>
       </div>
       `,
     };
@@ -630,13 +636,13 @@
     //PLEASE KEEP FOR ALL FUTURE ITERATIONS
 
     /* DEBRIEF */
-    // debrief participants -- just need to style it better for center - aranza
+    // debrief participants
     var debrief = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: `<center>
           <p>Thank you for participating in this study!</p>
-          <p>We had you complete <i>all</i> those trials in order to investigate mental rotation abilities.</p>
-          <p>With your help, we can better understand how people mentally rotate 3D objects in side-by-side comparisons.</p>
+          <p>This study was a replication of Ganis & Kievit (2015).</p>
+          <p>We had you complete <i>all</i> those trials in order to investigate mental rotation abilities. With your help, we can better understand whether people actually rotate objects in their head when thinking about and comparing objects of varying angles.</p>
           <p>Press any key to complete the experiment.</p> 
           </center>
           `,
