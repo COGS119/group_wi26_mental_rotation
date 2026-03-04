@@ -1,2 +1,5 @@
 
 .DS_Store
+.Rproj.user
+analysis/.Rhistory
+analysis/basic_analysis.R

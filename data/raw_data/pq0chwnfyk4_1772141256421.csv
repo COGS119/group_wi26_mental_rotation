@@ -1,0 +1,209 @@
+"success","timeout","failed_images","failed_audio","failed_video","trial_type","trial_index","plugin_version","time_elapsed","random_id","participant","rt","stimulus","response","question_order","correct_key","correct","object_num","angle","correct_response","correct_response_key"
+"true","false","[]","[]","[]","preload","0","2.0.0","9413","pq0chwnfyk4","cub","","","","","","","","","",""
+"true","","","","","fullscreen","1","null","13514","pq0chwnfyk4","cub","3098","","","","","","","","",""
+"","","","","","html-keyboard-response","2","2.0.0","15766","pq0chwnfyk4","cub","2250","Welcome to the experiment. Press any key to begin."," ","","","","","","",""
+"","","","","","survey-text","3","2.0.0","26555","pq0chwnfyk4","cub","10786","","{""participant_id"":""cub""}","","","","","","",""
+"","","","","","html-keyboard-response","4","2.0.0","58665","pq0chwnfyk4","cub","32108","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","5","null","114288","pq0chwnfyk4","cub","55620","","{""same_definition"":""The two objects are physically identical."",""different_definition"":""The objects are physically identical but presented at a different orientation."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","6","2.0.0","118117","pq0chwnfyk4","cub","3827","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","7","2.0.0","131093","pq0chwnfyk4","cub","12974","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","8","null","189976","pq0chwnfyk4","cub","58879","","{""same_definition"":""The objects are the same size."",""different_definition"":""The two objects are physically distinct objects."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","9","2.0.0","191700","pq0chwnfyk4","cub","1722","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","10","2.0.0","212344","pq0chwnfyk4","cub","20642","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","11","null","239337","pq0chwnfyk4","cub","26992","","{""same_definition"":""The two objects are physically identical."",""different_definition"":""The objects are physically identical but presented at a different orientation."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","12","2.0.0","242943","pq0chwnfyk4","cub","3603","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","13","2.0.0","260001","pq0chwnfyk4","cub","17056","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","14","null","280518","pq0chwnfyk4","cub","20514","","{""same_definition"":""The objects are the same size."",""different_definition"":""The objects are physically identical but presented at a different orientation."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","15","2.0.0","282433","pq0chwnfyk4","cub","1912","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","16","2.0.0","293607","pq0chwnfyk4","cub","11173","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","17","null","326662","pq0chwnfyk4","cub","33052","","{""same_definition"":""The objects are completely different objects."",""different_definition"":""The objects are physically identical but presented at a different orientation."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","18","2.0.0","332529","pq0chwnfyk4","cub","5866","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","19","2.0.0","364006","pq0chwnfyk4","cub","31476","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","20","null","389617","pq0chwnfyk4","cub","25608","","{""same_definition"":""The two objects are physically identical."",""different_definition"":""The objects are physically identical but presented at a different orientation."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","21","2.0.0","391739","pq0chwnfyk4","cub","2120","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","22","2.0.0","438264","pq0chwnfyk4","cub","46523","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","23","null","459292","pq0chwnfyk4","cub","21025","","{""same_definition"":""The two objects are physically identical."",""different_definition"":""The objects are physically identical but presented at a different orientation."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","24","2.0.0","462409","pq0chwnfyk4","cub","3114","<p><font color='red'>You did not get all the questions correct. Press any key to re-read the instructions.</font></p>","n","","","","","","",""
+"","","","","","html-keyboard-response","25","2.0.0","462618","pq0chwnfyk4","cub","207","
+      <p>On each trial, you will see two 3D objects. The object on the left will be your <strong>baseline object</strong>. The object on the right will be the <strong>target object</strong>.</p>
+      <p>These objects may be at different orientations from each other.</p> 
+      <p>If the two objects are the same, press <strong>F</strong>.</p>
+      <p>If the two objects are different, press <strong>J</strong>.</p>
+      <p>Please respond as quickly and accurately as possible.</p>
+      <p>Press any key to continue.</p>
+    "," ","","","","","","",""
+"","","","","","survey-multi-choice","26","null","478355","pq0chwnfyk4","cub","15735","","{""same_definition"":""The two objects are physically identical."",""different_definition"":""The two objects are physically distinct objects."",""same_key"":""F key"",""different_key"":""J key"",""speed_accuracy"":""Respond as quickly and accurately as possible.""}","[0,1,2,3,4]","","","","","",""
+"","","","","","html-keyboard-response","27","2.0.0","482589","pq0chwnfyk4","cub","4233","<p><font color='green'>All correct! Press any key to continue.</font></p>"," ","","","","","","",""
+"","","","","","html-keyboard-response","29","2.0.0","488720","pq0chwnfyk4","cub","6130","There will be 8 practice trials before the real experiment. Press any key to begin."," ","","","","","","",""
+"","","","","","html-keyboard-response","30","2.0.0","495919","pq0chwnfyk4","cub","7198","<img src=""stimuli/2_100.jpg"">","f","","f","true","","","",""
+"","","","","","html-keyboard-response","31","2.0.0","496923","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","32","2.0.0","500619","pq0chwnfyk4","cub","3444","<img src=""stimuli/1_150.jpg"">","f","","f","true","","","",""
+"","","","","","html-keyboard-response","33","2.0.0","501621","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","34","2.0.0","504189","pq0chwnfyk4","cub","2314","<img src=""stimuli/2_0.jpg"">","f","","f","true","","","",""
+"","","","","","html-keyboard-response","35","2.0.0","505192","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","36","2.0.0","508464","pq0chwnfyk4","cub","3020","<img src=""stimuli/1_50.jpg"">","f","","f","true","","","",""
+"","","","","","html-keyboard-response","37","2.0.0","509467","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","38","2.0.0","520193","pq0chwnfyk4","cub","10467","<img src=""stimuli/2_50_R.jpg"">","j","","j","true","","","",""
+"","","","","","html-keyboard-response","39","2.0.0","521197","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","40","2.0.0","525003","pq0chwnfyk4","cub","3554","<img src=""stimuli/2_150_R.jpg"">","j","","j","true","","","",""
+"","","","","","html-keyboard-response","41","2.0.0","526008","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","42","2.0.0","533621","pq0chwnfyk4","cub","7359","<img src=""stimuli/1_100_R.jpg"">","j","","j","true","","","",""
+"","","","","","html-keyboard-response","43","2.0.0","534624","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","44","2.0.0","537364","pq0chwnfyk4","cub","2487","<img src=""stimuli/1_0_R.jpg"">","j","","j","true","","","",""
+"","","","","","html-keyboard-response","45","2.0.0","538367","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: green;"">Correct!</p>","null","","","","","","",""
+"","","","","","html-keyboard-response","46","2.0.0","548539","pq0chwnfyk4","cub","9919","We will now begin the real experiment. Unlike the practice, feedback will only appear for incorrect answers, and trials will time out if you take too long. Press any key to begin."," ","","","","","","",""
+"","","","","","image-keyboard-response","47","2.0.0","551026","pq0chwnfyk4","cub","2483","stimuli/15_0_R.jpg","j","","","true","15","0","different","j"
+"","","","","","image-keyboard-response","49","2.0.0","554983","pq0chwnfyk4","cub","3688","stimuli/22_100.jpg","f","","","true","22","100","same","f"
+"","","","","","image-keyboard-response","51","2.0.0","560326","pq0chwnfyk4","cub","5074","stimuli/48_150_R.jpg","j","","","true","48","150","different","j"
+"","","","","","image-keyboard-response","53","2.0.0","563387","pq0chwnfyk4","cub","2791","stimuli/37_0_R.jpg","j","","","true","37","0","different","j"
+"","","","","","image-keyboard-response","55","2.0.0","564954","pq0chwnfyk4","cub","1299","stimuli/18_0_R.jpg","j","","","true","18","0","different","j"
+"","","","","","image-keyboard-response","57","2.0.0","567085","pq0chwnfyk4","cub","1863","stimuli/15_150.jpg","f","","","true","15","150","same","f"
+"","","","","","image-keyboard-response","59","2.0.0","569082","pq0chwnfyk4","cub","1727","stimuli/28_50_R.jpg","j","","","true","28","50","different","j"
+"","","","","","image-keyboard-response","61","2.0.0","570523","pq0chwnfyk4","cub","1172","stimuli/48_0.jpg","f","","","true","48","0","same","f"
+"","","","","","image-keyboard-response","63","2.0.0","573283","pq0chwnfyk4","cub","2490","stimuli/9_100_R.jpg","j","","","true","9","100","different","j"
+"","","","","","image-keyboard-response","65","2.0.0","575603","pq0chwnfyk4","cub","2051","stimuli/12_50.jpg","f","","","true","12","50","same","f"
+"","","","","","image-keyboard-response","67","2.0.0","577633","pq0chwnfyk4","cub","1759","stimuli/22_0_R.jpg","j","","","true","22","0","different","j"
+"","","","","","image-keyboard-response","69","2.0.0","579525","pq0chwnfyk4","cub","1607","stimuli/30_0_R.jpg","j","","","true","30","0","different","j"
+"","","","","","image-keyboard-response","71","2.0.0","583487","pq0chwnfyk4","cub","3693","stimuli/15_50.jpg","f","","","true","15","50","same","f"
+"","","","","","image-keyboard-response","73","2.0.0","586580","pq0chwnfyk4","cub","2825","stimuli/44_50_R.jpg","j","","","true","44","50","different","j"
+"","","","","","image-keyboard-response","75","2.0.0","589102","pq0chwnfyk4","cub","2253","stimuli/35_0.jpg","f","","","true","35","0","same","f"
+"","","","","","image-keyboard-response","77","2.0.0","592593","pq0chwnfyk4","cub","3223","stimuli/3_100_R.jpg","j","","","true","3","100","different","j"
+"","","","","","image-keyboard-response","79","2.0.0","596051","pq0chwnfyk4","cub","3189","stimuli/14_100.jpg","f","","","true","14","100","same","f"
+"","","","","","image-keyboard-response","81","2.0.0","600303","pq0chwnfyk4","cub","3984","stimuli/33_150_R.jpg","j","","","true","33","150","different","j"
+"","","","","","image-keyboard-response","83","2.0.0","602638","pq0chwnfyk4","cub","2066","stimuli/1_0.jpg","f","","","true","1","0","same","f"
+"","","","","","image-keyboard-response","85","2.0.0","608663","pq0chwnfyk4","cub","5757","stimuli/35_150_R.jpg","j","","","true","35","150","different","j"
+"","","","","","image-keyboard-response","87","2.0.0","610821","pq0chwnfyk4","cub","1892","stimuli/47_100_R.jpg","j","","","true","47","100","different","j"
+"","","","","","image-keyboard-response","89","2.0.0","614202","pq0chwnfyk4","cub","3114","stimuli/43_150.jpg","j","","","false","43","150","same","f"
+"","","","","","html-keyboard-response","90","2.0.0","615472","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","91","2.0.0","618025","pq0chwnfyk4","cub","2551","stimuli/29_150.jpg","f","","","true","29","150","same","f"
+"","","","","","image-keyboard-response","93","2.0.0","620929","pq0chwnfyk4","cub","2636","stimuli/19_50.jpg","f","","","true","19","50","same","f"
+"","","","","","image-keyboard-response","95","2.0.0","625576","pq0chwnfyk4","cub","4379","stimuli/9_150_R.jpg","j","","","true","9","150","different","j"
+"","","","","","image-keyboard-response","97","2.0.0","627246","pq0chwnfyk4","cub","1401","stimuli/28_0.jpg","f","","","true","28","0","same","f"
+"","","","","","image-keyboard-response","99","2.0.0","629008","pq0chwnfyk4","cub","1494","stimuli/48_0_R.jpg","j","","","true","48","0","different","j"
+"","","","","","image-keyboard-response","101","2.0.0","635759","pq0chwnfyk4","cub","6484","stimuli/33_100_R.jpg","j","","","true","33","100","different","j"
+"","","","","","image-keyboard-response","103","2.0.0","637932","pq0chwnfyk4","cub","1905","stimuli/33_50.jpg","f","","","true","33","50","same","f"
+"","","","","","image-keyboard-response","105","2.0.0","642347","pq0chwnfyk4","cub","4145","stimuli/10_150_R.jpg","j","","","true","10","150","different","j"
+"","","","","","image-keyboard-response","107","2.0.0","646949","pq0chwnfyk4","cub","4334","stimuli/40_100.jpg","j","","","false","40","100","same","f"
+"","","","","","html-keyboard-response","108","2.0.0","648219","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","109","2.0.0","651732","pq0chwnfyk4","cub","3511","stimuli/29_100_R.jpg","j","","","true","29","100","different","j"
+"","","","","","image-keyboard-response","111","2.0.0","654527","pq0chwnfyk4","cub","2528","stimuli/38_100.jpg","f","","","true","38","100","same","f"
+"","","","","","image-keyboard-response","113","2.0.0","656786","pq0chwnfyk4","cub","1991","stimuli/46_50_R.jpg","j","","","true","46","50","different","j"
+"","","","","","image-keyboard-response","115","2.0.0","661530","pq0chwnfyk4","cub","4476","stimuli/32_100.jpg","f","","","true","32","100","same","f"
+"","","","","","image-keyboard-response","117","2.0.0","664636","pq0chwnfyk4","cub","2837","stimuli/8_100_R.jpg","j","","","true","8","100","different","j"
+"","","","","","image-keyboard-response","119","2.0.0","668034","pq0chwnfyk4","cub","3128","stimuli/40_50_R.jpg","j","","","true","40","50","different","j"
+"","","","","","image-keyboard-response","121","2.0.0","671129","pq0chwnfyk4","cub","2828","stimuli/24_150.jpg","f","","","true","24","150","same","f"
+"","","","","","image-keyboard-response","123","2.0.0","674277","pq0chwnfyk4","cub","2879","stimuli/31_100.jpg","f","","","true","31","100","same","f"
+"","","","","","image-keyboard-response","125","2.0.0","678919","pq0chwnfyk4","cub","4373","stimuli/34_150_R.jpg","j","","","true","34","150","different","j"
+"","","","","","image-keyboard-response","127","2.0.0","685024","pq0chwnfyk4","cub","5836","stimuli/5_0_R.jpg","j","","","true","5","0","different","j"
+"","","","","","image-keyboard-response","129","2.0.0","687748","pq0chwnfyk4","cub","2455","stimuli/19_100.jpg","f","","","true","19","100","same","f"
+"","","","","","image-keyboard-response","131","2.0.0","693384","pq0chwnfyk4","cub","5368","stimuli/26_50.jpg","f","","","true","26","50","same","f"
+"","","","","","image-keyboard-response","133","2.0.0","696314","pq0chwnfyk4","cub","2661","stimuli/43_150_R.jpg","j","","","true","43","150","different","j"
+"","","","","","image-keyboard-response","135","2.0.0","698633","pq0chwnfyk4","cub","2050","stimuli/33_50_R.jpg","j","","","true","33","50","different","j"
+"","","","","","image-keyboard-response","137","2.0.0","700841","pq0chwnfyk4","cub","1940","stimuli/33_0.jpg","f","","","true","33","0","same","f"
+"","","","","","image-keyboard-response","139","2.0.0","707392","pq0chwnfyk4","cub","6284","stimuli/45_100.jpg","f","","","true","45","100","same","f"
+"","","","","","image-keyboard-response","141","2.0.0","711465","pq0chwnfyk4","cub","3805","stimuli/10_50_R.jpg","j","","","true","10","50","different","j"
+"","","","","","html-keyboard-response","143","2.0.0","715211","pq0chwnfyk4","cub","3477","You may now take a brief break before the next block. Press any key to continue."," ","","","","","","",""
+"","","","","","image-keyboard-response","144","2.0.0","721051","pq0chwnfyk4","cub","5838","stimuli/3_150.jpg","f","","","true","3","150","same","f"
+"","","","","","image-keyboard-response","146","2.0.0","727706","pq0chwnfyk4","cub","6207","stimuli/5_50_R.jpg","j","","","true","5","50","different","j"
+"","","","","","image-keyboard-response","148","2.0.0","730895","pq0chwnfyk4","cub","2742","stimuli/4_50.jpg","f","","","true","4","50","same","f"
+"","","","","","image-keyboard-response","150","2.0.0","738845","pq0chwnfyk4","cub","null","stimuli/29_150_R.jpg","null","","","false","29","150","different","j"
+"","","","","","html-keyboard-response","151","2.0.0","740294","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","152","2.0.0","747798","pq0chwnfyk4","cub","null","stimuli/34_0.jpg","null","","","false","34","0","same","f"
+"","","","","","html-keyboard-response","153","2.0.0","749247","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","154","2.0.0","753934","pq0chwnfyk4","cub","4685","stimuli/29_50.jpg","f","","","true","29","50","same","f"
+"","","","","","image-keyboard-response","156","2.0.0","757191","pq0chwnfyk4","cub","2809","stimuli/20_50_R.jpg","j","","","true","20","50","different","j"
+"","","","","","image-keyboard-response","158","2.0.0","762122","pq0chwnfyk4","cub","4484","stimuli/21_100_R.jpg","j","","","true","21","100","different","j"
+"","","","","","image-keyboard-response","160","2.0.0","764305","pq0chwnfyk4","cub","1735","stimuli/11_50.jpg","f","","","true","11","50","same","f"
+"","","","","","image-keyboard-response","162","2.0.0","766427","pq0chwnfyk4","cub","1674","stimuli/12_0_R.jpg","j","","","true","12","0","different","j"
+"","","","","","image-keyboard-response","164","2.0.0","768448","pq0chwnfyk4","cub","1573","stimuli/23_50.jpg","f","","","true","23","50","same","f"
+"","","","","","image-keyboard-response","166","2.0.0","769854","pq0chwnfyk4","cub","959","stimuli/23_0.jpg","f","","","true","23","0","same","f"
+"","","","","","image-keyboard-response","168","2.0.0","773202","pq0chwnfyk4","cub","2897","stimuli/36_100_R.jpg","j","","","true","36","100","different","j"
+"","","","","","image-keyboard-response","170","2.0.0","774594","pq0chwnfyk4","cub","944","stimuli/4_0.jpg","f","","","true","4","0","same","f"
+"","","","","","image-keyboard-response","172","2.0.0","776057","pq0chwnfyk4","cub","1016","stimuli/19_0_R.jpg","j","","","true","19","0","different","j"
+"","","","","","image-keyboard-response","174","2.0.0","782050","pq0chwnfyk4","cub","5545","stimuli/31_100_R.jpg","j","","","true","31","100","different","j"
+"","","","","","image-keyboard-response","176","2.0.0","784904","pq0chwnfyk4","cub","2406","stimuli/48_50.jpg","f","","","true","48","50","same","f"
+"","","","","","image-keyboard-response","178","2.0.0","787033","pq0chwnfyk4","cub","1681","stimuli/28_50.jpg","f","","","true","28","50","same","f"
+"","","","","","image-keyboard-response","180","2.0.0","789044","pq0chwnfyk4","cub","1565","stimuli/11_0_R.jpg","j","","","true","11","0","different","j"
+"","","","","","image-keyboard-response","182","2.0.0","791653","pq0chwnfyk4","cub","2162","stimuli/7_150_R.jpg","j","","","true","7","150","different","j"
+"","","","","","image-keyboard-response","184","2.0.0","795849","pq0chwnfyk4","cub","3748","stimuli/29_100.jpg","f","","","true","29","100","same","f"
+"","","","","","image-keyboard-response","186","2.0.0","798075","pq0chwnfyk4","cub","1778","stimuli/22_150.jpg","f","","","true","22","150","same","f"
+"","","","","","image-keyboard-response","188","2.0.0","799471","pq0chwnfyk4","cub","948","stimuli/18_50_R.jpg","j","","","true","18","50","different","j"
+"","","","","","image-keyboard-response","190","2.0.0","802404","pq0chwnfyk4","cub","2484","stimuli/2_150.jpg","f","","","true","2","150","same","f"
+"","","","","","image-keyboard-response","192","2.0.0","804160","pq0chwnfyk4","cub","1308","stimuli/14_50_R.jpg","j","","","true","14","50","different","j"
+"","","","","","image-keyboard-response","194","2.0.0","806022","pq0chwnfyk4","cub","1416","stimuli/23_100.jpg","f","","","true","23","100","same","f"
+"","","","","","image-keyboard-response","196","2.0.0","807545","pq0chwnfyk4","cub","1076","stimuli/14_150.jpg","j","","","false","14","150","same","f"
+"","","","","","html-keyboard-response","197","2.0.0","808994","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","198","2.0.0","809869","pq0chwnfyk4","cub","872","stimuli/21_50_R.jpg","j","","","true","21","50","different","j"
+"","","","","","image-keyboard-response","200","2.0.0","817282","pq0chwnfyk4","cub","6965","stimuli/40_100_R.jpg","j","","","true","40","100","different","j"
+"","","","","","image-keyboard-response","202","2.0.0","820715","pq0chwnfyk4","cub","2985","stimuli/22_150_R.jpg","j","","","true","22","150","different","j"
+"","","","","","image-keyboard-response","204","2.0.0","822519","pq0chwnfyk4","cub","1356","stimuli/23_150.jpg","f","","","true","23","150","same","f"
+"","","","","","image-keyboard-response","206","2.0.0","824074","pq0chwnfyk4","cub","1107","stimuli/41_50.jpg","f","","","true","41","50","same","f"
+"","","","","","image-keyboard-response","208","2.0.0","826109","pq0chwnfyk4","cub","1588","stimuli/7_0.jpg","f","","","true","7","0","same","f"
+"","","","","","image-keyboard-response","210","2.0.0","828760","pq0chwnfyk4","cub","2204","stimuli/27_100_R.jpg","f","","","false","27","100","different","j"
+"","","","","","html-keyboard-response","211","2.0.0","830208","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","212","2.0.0","832107","pq0chwnfyk4","cub","1897","stimuli/5_0.jpg","f","","","true","5","0","same","f"
+"","","","","","image-keyboard-response","214","2.0.0","835826","pq0chwnfyk4","cub","3271","stimuli/48_100_R.jpg","j","","","true","48","100","different","j"
+"","","","","","image-keyboard-response","216","2.0.0","838272","pq0chwnfyk4","cub","1998","stimuli/26_150.jpg","f","","","true","26","150","same","f"
+"","","","","","image-keyboard-response","218","2.0.0","839992","pq0chwnfyk4","cub","1273","stimuli/28_0_R.jpg","j","","","true","28","0","different","j"
+"","","","","","image-keyboard-response","220","2.0.0","843132","pq0chwnfyk4","cub","2692","stimuli/30_150_R.jpg","f","","","false","30","150","different","j"
+"","","","","","html-keyboard-response","221","2.0.0","844580","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","222","2.0.0","845828","pq0chwnfyk4","cub","1245","stimuli/15_0.jpg","f","","","true","15","0","same","f"
+"","","","","","image-keyboard-response","224","2.0.0","848372","pq0chwnfyk4","cub","2096","stimuli/24_150_R.jpg","j","","","true","24","150","different","j"
+"","","","","","image-keyboard-response","226","2.0.0","850743","pq0chwnfyk4","cub","1924","stimuli/24_100.jpg","f","","","true","24","100","same","f"
+"","","","","","image-keyboard-response","228","2.0.0","852418","pq0chwnfyk4","cub","1227","stimuli/29_0.jpg","f","","","true","29","0","same","f"
+"","","","","","image-keyboard-response","230","2.0.0","853852","pq0chwnfyk4","cub","987","stimuli/39_50_R.jpg","j","","","true","39","50","different","j"
+"","","","","","image-keyboard-response","232","2.0.0","856547","pq0chwnfyk4","cub","2247","stimuli/35_150.jpg","j","","","false","35","150","same","f"
+"","","","","","html-keyboard-response","233","2.0.0","857995","pq0chwnfyk4","cub","null","<p style=""font-size: 50px; color: red;"">Incorrect</p>","null","","","","","","",""
+"","","","","","image-keyboard-response","234","2.0.0","860113","pq0chwnfyk4","cub","2116","stimuli/18_100.jpg","f","","","true","18","100","same","f"
+"","","","","","image-keyboard-response","236","2.0.0","864768","pq0chwnfyk4","cub","4207","stimuli/17_150.jpg","f","","","true","17","150","same","f"
+"","","","","","image-keyboard-response","238","2.0.0","866696","pq0chwnfyk4","cub","1480","stimuli/34_0_R.jpg","j","","","true","34","0","different","j"
+"","","","","","survey-html-form","240","null","911817","pq0chwnfyk4","cub","44691","","{""age"":""22"",""year"":""4th year"",""major"":""Machine Learning & Neural Computation"",""minor"":"""",""gender"":""Man"",""about"":""3D shape mindmap"",""difficulties"":""No""}","","","","","","",""
